@@ -11,6 +11,7 @@ export default function Quiz({ questions, title }) {
 
   const q = questions[current];
   const totalQ = questions.length;
+  // answers stores just the letter ("A","B","C","D") for reliable comparison
   const score = Object.entries(answers).filter(([i, a]) => questions[i].answer === a).length;
 
   const handleSelect = (opt) => {
@@ -21,7 +22,8 @@ export default function Quiz({ questions, title }) {
   const handleSubmit = () => {
     if (!selected) return;
     setSubmitted(true);
-    setAnswers(prev => ({ ...prev, [current]: selected }));
+    // store only the letter so comparison with q.answer always works
+    setAnswers(prev => ({ ...prev, [current]: selected.charAt(0) }));
   };
 
   const handleNext = () => {
@@ -46,8 +48,8 @@ export default function Quiz({ questions, title }) {
 
   const optionClass = (opt) => {
     if (!submitted) return selected === opt ? 'option selected' : 'option';
-    if (opt === q.answer) return 'option correct';
-    if (opt === selected && opt !== q.answer) return 'option wrong';
+    if (opt.charAt(0) === q.answer) return 'option correct';
+    if (opt === selected && opt.charAt(0) !== q.answer) return 'option wrong';
     return 'option';
   };
 
@@ -91,12 +93,12 @@ export default function Quiz({ questions, title }) {
         <div className="options-list">
           {rq.options.map((opt) => (
             <div key={opt} className={
-              opt === rq.answer ? 'option correct' :
-              opt === userAnswer && opt !== rq.answer ? 'option wrong' : 'option'
+              opt.charAt(0) === rq.answer ? 'option correct' :
+              opt === userAnswer || opt.charAt(0) === userAnswer ? 'option wrong' : 'option'
             }>
               {opt}
-              {opt === rq.answer && <span className="correct-label"> ← Correct</span>}
-              {opt === userAnswer && opt !== rq.answer && <span className="wrong-label"> ← Your Answer</span>}
+              {opt.charAt(0) === rq.answer && <span className="correct-label"> ← Correct</span>}
+              {opt.charAt(0) === userAnswer && opt.charAt(0) !== rq.answer && <span className="wrong-label"> ← Your Answer</span>}
             </div>
           ))}
         </div>
@@ -139,7 +141,7 @@ export default function Quiz({ questions, title }) {
 
       {submitted && (
         <div className="explanation">
-          <strong>{selected === q.answer ? '✓ Correct!' : `✗ Incorrect. The answer is ${q.answer}.`}</strong>
+          <strong>{answers[current] === q.answer ? '✓ Correct!' : `✗ Incorrect. The answer is ${q.answer}.`}</strong>
           <br />{q.explanation}
         </div>
       )}

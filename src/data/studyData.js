@@ -114,6 +114,46 @@ export const topics = [
         answer: "C",
         explanation: "Beta-oxidation occurs in the mitochondrial matrix. Fatty acids must be transported into the mitochondria via carnitine transport before undergoing sequential 2-carbon cleavage as Acetyl-CoA."
       },
+      {
+        question: "Where in the cell does glycolysis occur?",
+        options: ["A. Mitochondrial matrix", "B. Nucleus", "C. Cytosol", "D. Endoplasmic reticulum"],
+        answer: "C",
+        explanation: "Glycolysis is a 10-step process that occurs entirely in the cytosol. Because it does not require mitochondria, it can proceed anaerobically — making it critical for high-intensity exercise when O₂ delivery is limited."
+      },
+      {
+        question: "What enzyme catalyzes the irreversible connecting step that converts pyruvate to Acetyl-CoA?",
+        options: ["A. Phosphofructokinase (PFK)", "B. Lactate dehydrogenase (LDH)", "C. Citrate synthase", "D. Pyruvate dehydrogenase complex (PDC)"],
+        answer: "D",
+        explanation: "The pyruvate dehydrogenase complex (PDC) converts pyruvate → Acetyl-CoA + CO₂ + NADH inside the mitochondrial matrix. This is an irreversible commitment to aerobic oxidation and connects glycolysis to the TCA cycle."
+      },
+      {
+        question: "An athlete performs 7 × 10-second sprints with 100 seconds of rest between each. Which energy system training principle does this protocol BEST illustrate?",
+        options: [
+          "A. Glycolytic system — 1:3 work:rest ratio",
+          "B. Oxidative system — continuous aerobic stimulus",
+          "C. Phosphagen system — 1:10 work:rest ratio for PCr resynthesis",
+          "D. All three systems trained equally"
+        ],
+        answer: "C",
+        explanation: "The phosphagen system requires a 1:10–1:15 work:rest ratio to allow near-complete PCr resynthesis. A 10-second sprint with 100 seconds rest = exactly 1:10, targeting PCr recovery so each sprint can be performed at maximal intensity."
+      },
+      {
+        question: "A trained endurance athlete has a lower RER than an untrained person at the same absolute workload (e.g., both running at 8 mph). The BEST physiological explanation is:",
+        options: [
+          "A. The trained athlete consumes less total oxygen",
+          "B. The trained athlete oxidizes more fat due to higher mitochondrial density and fat-oxidizing enzyme capacity",
+          "C. The trained athlete relies more on glycolysis at all intensities",
+          "D. Training reduces carbohydrate stores, forcing fat use"
+        ],
+        answer: "B",
+        explanation: "Endurance training increases mitochondrial density, CPT-1 enzyme activity, and fat oxidation capacity. This shifts the metabolic crossover to the right, allowing more fat oxidation (lower RER) at a given absolute workload — the primary mechanism of glycogen sparing in trained athletes."
+      },
+      {
+        question: "A palmitate molecule (16-carbon fatty acid) undergoes complete beta-oxidation. Approximately how many total ATP molecules are produced?",
+        options: ["A. 32–33 ATP", "B. ~50 ATP", "C. ~106 ATP", "D. ~129 ATP"],
+        answer: "D",
+        explanation: "Complete oxidation of palmitate yields approximately 129 ATP — roughly 4× more than one glucose molecule. This is because fats contain far less oxygen relative to carbon, requiring more oxidation steps but yielding far more NADH and FADH₂ for the ETC."
+      },
     ]
   },
   {
@@ -228,6 +268,57 @@ export const topics = [
         answer: "B",
         explanation: "While lower intensity exercise burns a higher *percentage* of fat, higher intensity burns more *total calories* and often more absolute fat. For overall fat loss, total caloric deficit matters most."
       },
+      {
+        question: "An athlete weighs 200 lbs and has 20% body fat. What is their fat-free mass (FFM)?",
+        options: ["A. 40 lbs", "B. 160 lbs", "C. 180 lbs", "D. 140 lbs"],
+        answer: "B",
+        explanation: "Fat mass = 20% × 200 = 40 lbs. FFM = 200 − 40 = 160 lbs. FFM includes everything except fat: muscle, bone, water, and organs. This is the metabolically active component that drives RMR."
+      },
+      {
+        question: "Which body composition method uses computerized air pressure sensors to calculate body density from displaced air volume?",
+        options: ["A. DEXA", "B. BIA", "C. Hydrostatic weighing", "D. Air displacement plethysmography (BodPod)"],
+        answer: "D",
+        explanation: "The BodPod uses air displacement plethysmography. The subject sits in a sealed chamber; the volume of air displaced equals body volume. Body density = mass ÷ volume, from which %BF is calculated — similar principle to hydrostatic weighing but without submersion."
+      },
+      {
+        question: "The skinfold method assumes subcutaneous fat correlates with total body fat. What is the primary limitation of this assumption?",
+        options: [
+          "A. It overestimates visceral (internal organ) fat in lean athletes",
+          "B. Subcutaneous fat distribution varies significantly by sex, age, and ethnicity, reducing predictive accuracy",
+          "C. Skinfolds cannot be measured in females",
+          "D. The method requires radiation exposure"
+        ],
+        answer: "B",
+        explanation: "Fat distribution patterns vary significantly across populations. People with the same total body fat can have very different subcutaneous vs. visceral fat distributions. This limits skinfold accuracy across diverse populations, though it remains highly correlated with DEXA and hydrostatic weighing when properly applied."
+      },
+      {
+        question: "Essential fat differs from storage fat in which key way?",
+        options: [
+          "A. Essential fat is only stored in adipose tissue; storage fat is found in organs",
+          "B. Essential fat is required for hormonal, reproductive, and immune function; storage fat is the excess depot in adipose tissue",
+          "C. Essential fat provides more calories per gram than storage fat",
+          "D. Storage fat is always harmful; essential fat is always beneficial"
+        ],
+        answer: "B",
+        explanation: "Essential fat (~3–5% in males, ~10–13% in females) is found in bone marrow, organs, and the nervous system and is critical for hormonal function, reproduction, and immunity. Females require more due to sex-specific hormonal needs. Storage fat is the additional depot in adipose tissue that expands with caloric surplus."
+      },
+      {
+        question: "For an 80 kg person aiming to lose fat at 0.5% body mass per week, approximately how many grams of fat should they lose per week?",
+        options: ["A. 40 g/week", "B. 200 g/week", "C. 400 g/week", "D. 800 g/week"],
+        answer: "C",
+        explanation: "0.5% × 80 kg = 0.4 kg = 400 g per week. Since 1 lb (~454 g) of fat ≈ 3,500 kcal, this rate requires roughly a 500 kcal/day deficit — a sustainable approach that preserves lean mass while losing fat at a meaningful rate."
+      },
+      {
+        question: "A hydrostatic weighing session shows an athlete weighs significantly MORE underwater relative to their body weight than expected. What does this indicate?",
+        options: [
+          "A. High body fat percentage — fat is more buoyant",
+          "B. Low body fat percentage — lean tissue is denser and sinks more",
+          "C. The athlete has excess fluid retention",
+          "D. The measurement is invalid due to equipment error"
+        ],
+        answer: "B",
+        explanation: "Lean tissue (muscle, bone) is denser than water and sinks. Fat tissue is less dense (more buoyant). An athlete who weighs more underwater has a higher proportion of dense lean tissue, indicating lower body fat percentage. This is the direct application of Archimedes' principle."
+      },
     ]
   },
   {
@@ -315,6 +406,78 @@ export const topics = [
         ],
         answer: "B",
         explanation: "Research (including the 2024 paper cited in lectures) found that only heavy, severe, and extreme intensity exercise — not moderate intensity (Zone 2) — significantly improved VO₂max and lactate thresholds. Zone 2 excels for fat oxidation and metabolic efficiency, not maximal aerobic capacity."
+      },
+      {
+        question: "Non-Exercise Activity Thermogenesis (NEAT) is best defined as:",
+        options: [
+          "A. Calories burned during structured gym workouts",
+          "B. The energy cost of digesting and absorbing food",
+          "C. All energy expended outside of sleeping, eating, and intentional exercise (fidgeting, standing, walking, occupational activity)",
+          "D. The resting metabolic rate measured during sleep"
+        ],
+        answer: "C",
+        explanation: "NEAT encompasses all non-exercise physical movement — from typing to standing to fidgeting. It is highly variable between individuals (can differ by 2,000 kcal/day) and is a major reason why people with the same RMR can have very different total energy expenditures."
+      },
+      {
+        question: "Research consistently shows wrist-worn fitness trackers are poor at measuring energy expenditure. What are they reasonably accurate for?",
+        options: [
+          "A. Neither heart rate nor energy expenditure",
+          "B. Heart rate monitoring, but not energy expenditure",
+          "C. Energy expenditure only during running",
+          "D. Both heart rate and energy expenditure equally"
+        ],
+        answer: "B",
+        explanation: "Studies (including Shcherbina et al., 2017) found wrist devices have reasonable heart rate accuracy but show up to 40–80% error for energy expenditure. This is because energy expenditure calculation requires many assumptions beyond heart rate (fitness level, body composition, movement type)."
+      },
+      {
+        question: "A client consumes a 500 kcal meal of pure protein (TEF ~30%) vs. a 500 kcal meal of pure fat (TEF ~5%). How many MORE net calories does the protein meal cost to digest?",
+        options: ["A. 25 more kcal", "B. 75 more kcal", "C. 125 more kcal", "D. 200 more kcal"],
+        answer: "C",
+        explanation: "Protein TEF: 30% × 500 = 150 kcal burned in digestion. Fat TEF: 5% × 500 = 25 kcal. Difference = 125 kcal. This is why high-protein diets increase total daily energy expenditure — protein literally costs more calories to process."
+      },
+      {
+        question: "For gaining lean muscle mass, the evidence-based recommended caloric surplus above maintenance is:",
+        options: [
+          "A. +1,000–2,000 kcal/day ('dirty bulk')",
+          "B. +250–500 kcal/day (10–20% above maintenance)",
+          "C. A large deficit to cut fat before building muscle",
+          "D. No surplus needed — only protein intake matters"
+        ],
+        answer: "B",
+        explanation: "A modest surplus of +250–500 kcal/day (10–20% above TDEE) maximizes muscle protein synthesis without excessive fat gain. Larger surpluses primarily increase fat mass rather than muscle. The carbohydrate should comprise most of the surplus to fuel training."
+      },
+      {
+        question: "According to the Satiety Index research, which food properties are most associated with feeling full on fewer calories?",
+        options: [
+          "A. High fat and high sugar content",
+          "B. Low fiber and high caloric density",
+          "C. High water content, high fiber, and high protein",
+          "D. High sodium and high starch content"
+        ],
+        answer: "C",
+        explanation: "The Satiety Index (Holt et al., 1995) measured satiety from 240-kcal portions of 38 foods. High water content (dilutes caloric density), fiber (slows gastric emptying), and protein (stimulates satiety hormones CCK, GLP-1) consistently produced the greatest satiety per calorie."
+      },
+      {
+        question: "A client gains 3 lbs in one day after a high-sodium dinner and travel. A dietitian explains this is likely NOT fat gain because:",
+        options: [
+          "A. Fat gain that fast is physically impossible under any circumstances",
+          "B. A 3-lb fat gain would require consuming ~10,500 kcal above TDEE in one day; the weight is likely water retention from sodium, GI contents, and disrupted routines",
+          "C. Travel prevents fat storage",
+          "D. Sodium eliminates fat from the body"
+        ],
+        answer: "B",
+        explanation: "1 lb of fat ≈ 3,500 kcal. A 3-lb fat gain would require ~10,500 excess kcal in one day — physiologically implausible. Daily weight fluctuations of 2–5 lbs are normal due to sodium-driven water retention, GI content, hydration status, and hormonal changes."
+      },
+      {
+        question: "The 'growth mindset' approach to dietary behavior change differs from 'all-or-nothing thinking' in which key way?",
+        options: [
+          "A. Growth mindset allows perfect adherence; all-or-nothing accepts failure",
+          "B. Growth mindset views any progress as meaningful and recovers from setbacks constructively; all-or-nothing abandons goals after a single slip",
+          "C. Growth mindset requires strict calorie tracking; all-or-nothing uses intuitive eating",
+          "D. There is no practical difference in outcomes"
+        ],
+        answer: "B",
+        explanation: "All-or-nothing thinking (e.g., 'I ate one bad meal, the whole day is ruined') leads to repeated abandonment of goals. Growth mindset ('I didn't follow my plan today — I'll try again tomorrow; progress is still progress') is associated with far better long-term adherence and outcomes."
       },
     ]
   },
@@ -419,6 +582,73 @@ export const topics = [
         answer: "C",
         explanation: "Brush-border enzymes (disaccharidases and dipeptidases) are embedded in the microvilli of enterocytes (intestinal cells). They complete the final breakdown of disaccharides → monosaccharides and dipeptides → amino acids before absorption across the intestinal membrane."
       },
+      {
+        question: "What is the approximate capacity of the stomach when fully stretched?",
+        options: ["A. 1.5 liters", "B. 3 liters", "C. 6 liters", "D. 10 liters"],
+        answer: "C",
+        explanation: "The stomach is ~8–10 inches long and can hold ~1.5 L when empty and up to ~6 L when fully stretched (1.6 gallons). This large storage capacity allows it to act as a holding tank, regulating the rate at which food enters the small intestine for digestion and absorption."
+      },
+      {
+        question: "Food typically passes from the small intestine to the large intestine in how long?",
+        options: ["A. 10–30 seconds", "B. 0–60 minutes", "C. 3–10 hours", "D. 24–48 hours"],
+        answer: "C",
+        explanation: "Transit from the small intestine to the large intestine takes approximately 3–10 hours. The entire GI journey (mouth to toilet) takes 1–3 days. This timeline is relevant for understanding when nutrients become available and how exercise timing affects digestion."
+      },
+      {
+        question: "The pancreas secretes which substance to neutralize stomach acid entering the small intestine?",
+        options: [
+          "A. Hydrochloric acid (HCl) to continue digestion",
+          "B. Bile salts for fat emulsification",
+          "C. Bicarbonate to neutralize HCl and create optimal pH for pancreatic enzymes",
+          "D. Salivary amylase to complete carbohydrate digestion"
+        ],
+        answer: "C",
+        explanation: "The pancreas secretes bicarbonate (a base) into the duodenum to neutralize the highly acidic chyme from the stomach. This creates a neutral/slightly alkaline pH (~7–8) that is optimal for pancreatic enzymes (amylase, lipase, proteases) to function properly."
+      },
+      {
+        question: "Mechanical disruption of the gut during running has what dose-dependent effect on gastric emptying?",
+        options: [
+          "A. Always slows gastric emptying regardless of intensity",
+          "B. Has no effect — only nutrition content matters",
+          "C. Enhances gastric emptying at low-moderate intensities but impairs it at high intensities",
+          "D. Enhances emptying at all intensities due to increased blood flow"
+        ],
+        answer: "C",
+        explanation: "The jostling motion of running has a dose-dependent effect: at low-to-moderate intensities, the mechanical movement actually speeds up gastric emptying (enhanced motility). At high intensities, combined effects of reduced blood flow, high sympathetic tone, and mechanical disruption impair GI function."
+      },
+      {
+        question: "Which correctly lists the order of the small intestine segments from proximal to distal?",
+        options: [
+          "A. Jejunum → Duodenum → Ileum",
+          "B. Ileum → Jejunum → Duodenum",
+          "C. Duodenum → Jejunum → Ileum",
+          "D. Duodenum → Ileum → Jejunum"
+        ],
+        answer: "C",
+        explanation: "The small intestine runs: Duodenum (~1 foot, first segment receiving bile/pancreatic juice) → Jejunum (~8 feet, primary absorption site) → Ileum (~10 feet, specialized absorption of bile salts and Vitamin B12). The total length of ~19 feet provides enormous surface area for nutrient absorption."
+      },
+      {
+        question: "Which set of enzyme-substrate pairs correctly matches the three major digestive enzymes?",
+        options: [
+          "A. Amylase → fat; Lipase → protein; Protease → carbohydrate",
+          "B. Amylase → carbohydrate; Lipase → fat; Protease → protein",
+          "C. Amylase → protein; Lipase → carbohydrate; Protease → fat",
+          "D. All three enzymes work on all three substrates equally"
+        ],
+        answer: "B",
+        explanation: "Amylases break down carbohydrates (starch → disaccharides → monosaccharides). Lipases hydrolyze fats (triglycerides → fatty acids + glycerol). Proteases cleave proteins (→ peptides → amino acids). Each enzyme class is highly specific to its substrate."
+      },
+      {
+        question: "Why do nutrients provide NO benefit until they are absorbed into the blood? What is the clinical relevance?",
+        options: [
+          "A. Nutrients in the GI lumen are toxic until absorbed; absorption detoxifies them",
+          "B. Nutrients in the GI lumen are not bioavailable — only absorbed nutrients can be transported to tissues for energy production, repair, and function",
+          "C. Absorption only occurs in the large intestine, so eating rapidly is ineffective",
+          "D. Nutrients are stored in the GI wall before being released slowly into the blood"
+        ],
+        answer: "B",
+        explanation: "This principle explains why gastric emptying rate, digestion efficiency, and absorption capacity matter in sport nutrition. A carbohydrate gel eaten during a race provides no energy until it is digested and absorbed. Factors that slow absorption (high osmolality, high fat/fiber, high exercise intensity) delay fuel delivery."
+      },
     ]
   },
   {
@@ -520,6 +750,89 @@ export const topics = [
         ],
         answer: "B",
         explanation: "The CHO RDA is 130 g/day, set to provide the minimum amount needed to supply glucose to the brain and central nervous system (which requires ~120 g/day). Athletes need significantly more (6–12 g/kg/day) to support training demands."
+      },
+      {
+        question: "How many grams of water are stored per gram of glycogen in muscle tissue?",
+        options: ["A. 0.5 g water/g glycogen", "B. 1.0 g water/g glycogen", "C. 2.7 g water/g glycogen", "D. 4.5 g water/g glycogen"],
+        answer: "C",
+        explanation: "Glycogen is stored with approximately 2.7 g of water per gram of glycogen. This explains why carbohydrate loading causes significant water retention and why low-carb diets produce rapid initial weight loss — it's mostly water from depleted glycogen stores, not fat."
+      },
+      {
+        question: "The Recommended Daily Allowance (RDA) for dietary fat is:",
+        options: [
+          "A. 20–35% of total caloric intake — there is NO specific gram-based RDA for fat",
+          "B. 50–70 g/day regardless of body size",
+          "C. Less than 10% of total calories",
+          "D. Exactly 65 g/day based on a 2,000 kcal reference diet"
+        ],
+        answer: "A",
+        explanation: "Unlike protein (0.8 g/kg) and carbohydrate (130 g/day), there is NO gram-based RDA for fat. The Food and Nutrition Board recommends fat comprise 20–35% of total caloric intake, with emphasis on replacing saturated fat with unsaturated fat for cardiovascular health."
+      },
+      {
+        question: "Omega-3 fatty acids benefit athletes via which of the following mechanisms?",
+        options: [
+          "A. Increased glycogen storage and reduced fat oxidation",
+          "B. Increased muscle protein synthesis, improved cognitive function, anti-inflammatory effects, and enhanced recovery",
+          "C. Direct ATP production as a primary fuel source during exercise",
+          "D. Reduced oxygen-carrying capacity to prevent overexertion"
+        ],
+        answer: "B",
+        explanation: "Research on omega-3s in athletes (Anzalone et al., 2019) shows potential benefits including increased MPS, improved cognitive processing, anti-inflammatory effects, and enhanced recovery from mild traumatic brain injury (mTBI) and exercise-induced muscle damage."
+      },
+      {
+        question: "Amylose digests slowly while amylopectin digests rapidly. What structural difference explains this?",
+        options: [
+          "A. Amylose has more glucose units than amylopectin",
+          "B. Amylose is a linear helical chain with limited enzyme access; amylopectin is highly branched with many end points for enzyme attack",
+          "C. Amylose contains fructose while amylopectin contains only glucose",
+          "D. Amylose is fat-soluble; amylopectin is water-soluble"
+        ],
+        answer: "B",
+        explanation: "Amylose (200–4,000 glucose units in a linear coil) provides few enzyme access points, slowing hydrolysis. Amylopectin (highly branched) allows multiple enzymes to attack simultaneously, resulting in rapid digestion and a faster blood glucose response."
+      },
+      {
+        question: "Water makes up approximately what percentage of body mass, and which tissue has the HIGHEST water content?",
+        options: [
+          "A. 30–40%; adipose tissue (~50% water)",
+          "B. 60–70%; muscle tissue (~73% water)",
+          "C. 80–90%; bone tissue (~90% water)",
+          "D. 50–60%; blood (~92% water)"
+        ],
+        answer: "B",
+        explanation: "Water comprises ~60–70% of body mass. Muscle is ~73% water while adipose tissue is only ~15–20% water. Leaner individuals have higher total body water percentages, and glycogen depletion (which releases stored water) causes rapid weight loss on low-carb diets."
+      },
+      {
+        question: "HFCS-55, commonly found in sodas, contains which ratio of fructose to glucose?",
+        options: [
+          "A. 55% glucose, 45% fructose",
+          "B. 55% fructose, 45% glucose",
+          "C. 100% fructose in a 55% solution",
+          "D. 50% sucrose and 5% fructose"
+        ],
+        answer: "B",
+        explanation: "HFCS-55 is 55% fructose and 45% glucose (76% total CHO, 24% water). It is used in soft drinks because the high fructose content makes it sweeter. HFCS-42 (42% fructose) is used in baked goods. Fructose is metabolized primarily in the liver, with different metabolic effects than glucose."
+      },
+      {
+        question: "A food label shows 10g fat, 30g carbohydrate, and 5g protein. What is the correct total calorie calculation?",
+        options: [
+          "A. (10+30+5) × 4 = 180 kcal",
+          "B. (10×4) + (30×9) + (5×4) = 330 kcal",
+          "C. (10×9) + (30×4) + (5×4) = 230 kcal",
+          "D. (10+30+5) × 9 = 405 kcal"
+        ],
+        answer: "C",
+        explanation: "Fat = 10 × 9 = 90 kcal; CHO = 30 × 4 = 120 kcal; PRO = 5 × 4 = 20 kcal. Total = 230 kcal. Remember: fat = 9 kcal/g; CHO and PRO = 4 kcal/g each. This calculation is the foundation of accurate food label interpretation."
+      },
+      {
+        question: "The Biological Value (BV) of a protein measures what?",
+        options: [
+          "A. How quickly a protein is digested and absorbed",
+          "B. The completeness of essential amino acid profile and nitrogen retention efficiency after absorption",
+          "C. The total protein content per gram of food",
+          "D. The amount of protein required to cause muscle hypertrophy"
+        ],
+        answer: "B",
+        explanation: "Biological Value (BV) measures what proportion of absorbed nitrogen is retained for body functions. High BV proteins (whey ~104, egg ~100, milk ~91) provide all essential amino acids in favorable ratios. Plant proteins typically have lower BV because they lack one or more EAAs."
       },
     ]
   },
@@ -628,6 +941,83 @@ export const topics = [
         ],
         answer: "C",
         explanation: "Whole foods contain complex matrices of nutrients, phytochemicals, fiber, and antioxidants that interact synergistically. Isolated supplement forms cannot replicate these interactions. Additionally, supplements address deficiency but cannot compensate for an overall poor dietary pattern."
+      },
+      {
+        question: "What distinguishes the RDA from the Estimated Average Requirement (EAR) and the Tolerable Upper Limit (TUL)?",
+        options: [
+          "A. RDA = 50% of population needs; EAR = 97.5%; TUL = minimum safe dose",
+          "B. RDA = 97.5% of population needs; EAR = 50%; TUL = maximum intake without known adverse effects",
+          "C. RDA and EAR are identical; TUL refers only to fat-soluble vitamins",
+          "D. TUL represents the optimal dose; RDA and EAR represent deficiency thresholds"
+        ],
+        answer: "B",
+        explanation: "EAR meets the needs of 50% of the population. RDA (typically EAR + 2 SD) meets ~97.5% of the population's needs. TUL is the maximum daily intake at which no adverse health effects are expected. Understanding these distinctions prevents both deficiency and toxicity, especially for fat-soluble vitamins."
+      },
+      {
+        question: "Vitamin K is unique among vitamins because it can be synthesized without dietary intake. How?",
+        options: [
+          "A. It is synthesized from sunlight exposure on the skin like Vitamin D",
+          "B. It is produced by bacteria in the large intestine",
+          "C. It is recycled indefinitely from existing body stores",
+          "D. It is synthesized in the liver from cholesterol"
+        ],
+        answer: "B",
+        explanation: "Vitamin K is synthesized by gut microbiota (bacteria) in the large intestine. However, dietary sources are still important because the amount synthesized varies and absorption from the colon is limited. Antibiotics can disrupt this synthesis, affecting blood clotting."
+      },
+      {
+        question: "Sodium (Na⁺) is the primary electrolyte lost in sweat. At the cellular level, what is sodium's role in generating action potentials?",
+        options: [
+          "A. Na⁺ is the primary intracellular ion at rest; it rushes out during depolarization",
+          "B. Na⁺ is pumped OUT of cells at rest (maintaining -70 mV); during depolarization, Na⁺ rushes INTO the cell through channels, creating the action potential",
+          "C. Na⁺ has no role in action potentials — that is exclusively potassium's function",
+          "D. Na⁺ maintains membrane potential by staying inside the cell at all times"
+        ],
+        answer: "B",
+        explanation: "The Na⁺/K⁺-ATPase pump actively maintains -70 mV resting potential by pumping 3 Na⁺ out and 2 K⁺ in. During an action potential, voltage-gated Na⁺ channels open and Na⁺ floods into the cell, causing rapid depolarization. This is essential for muscle contraction and nerve transmission."
+      },
+      {
+        question: "Iron deficiency anemia impairs athletic performance primarily through which mechanism?",
+        options: [
+          "A. Reduced bone density, increasing stress fracture risk",
+          "B. Impaired oxygen transport due to reduced hemoglobin, and impaired aerobic ATP production due to reduced cytochromes in the ETC",
+          "C. Decreased glycogen storage capacity in muscle",
+          "D. Reduced testosterone production, impairing muscle hypertrophy"
+        ],
+        answer: "B",
+        explanation: "Iron is in hemoglobin (RBC oxygen transport), myoglobin (muscle oxygen storage), and cytochromes (ETC electron carriers). Iron deficiency simultaneously impairs O₂ delivery to tissues AND reduces the mitochondrial machinery for aerobic ATP production — a double impairment of endurance capacity."
+      },
+      {
+        question: "Calcium and phosphorus combine to form hydroxyapatite in bone. Which factor most accelerates bone calcium loss (demineralization)?",
+        options: [
+          "A. High dietary protein intake",
+          "B. Excess vitamin D supplementation",
+          "C. Combination of inadequate dietary calcium, low estrogen levels, and insufficient weight-bearing exercise",
+          "D. High carbohydrate intake"
+        ],
+        answer: "C",
+        explanation: "Bone demineralization (leading to osteoporosis) is accelerated by: poor dietary calcium intake (insufficient supply), low estrogen (loss of its bone-protective effect, especially post-menopause), and lack of mechanical loading (weight-bearing exercise stimulates osteoblast activity). This triad is particularly relevant for female athletes."
+      },
+      {
+        question: "Magnesium's ergogenic potential for athletes is linked to which specific performance outcomes based on research?",
+        options: [
+          "A. Increased glycogen synthesis and fat oxidation simultaneously",
+          "B. Decreased lactate production and increased vertical jump performance",
+          "C. Increased testosterone by 50% and reduced cortisol",
+          "D. Enhanced vitamin D absorption only"
+        ],
+        answer: "B",
+        explanation: "Research on magnesium as an ergogenic aid shows it may decrease lactate production (reducing fatigue markers) and increase vertical jump performance. Magnesium is involved in 300+ enzyme reactions, energy production, protein synthesis, and muscle function — making it particularly relevant for athletes with suboptimal intakes."
+      },
+      {
+        question: "Zinc is required for nearly how many enzyme reactions in the body, and what is its particular relevance for athletes?",
+        options: [
+          "A. ~20 enzyme reactions; primarily relevant for bone health",
+          "B. ~200 enzyme reactions; involved in protein synthesis, immune function, wound healing, and testosterone metabolism",
+          "C. ~50 enzyme reactions; primarily relevant for red blood cell production",
+          "D. ~500 enzyme reactions; primarily relevant for fat metabolism"
+        ],
+        answer: "B",
+        explanation: "Zinc is required for approximately 200 enzyme reactions. For athletes, it is critical for protein synthesis (muscle repair and growth), immune function (preventing illness during heavy training), wound healing, and testosterone metabolism. Intense endurance training increases zinc losses through sweat and urine."
       },
     ]
   }
@@ -760,4 +1150,60 @@ export const combinedQuiz = [
     answer: "B",
     explanation: "Multiple studies cited in lecture confirm Zone 2 improves mitochondrial function, metabolic efficiency, and fat oxidation — excellent for health and body composition with proper nutrition. However, research shows it does NOT significantly improve VO₂max; heavy, severe, or extreme intensities are required for that adaptation."
   },
+  {
+    question: "Using gas exchange data: VO₂ = 3.0 L/min, VCO₂ = 2.1 L/min. What is the RER and what does it indicate about fuel use?",
+    options: [
+      "A. RER = 0.70; 100% fat oxidation",
+      "B. RER = 0.85; approximately 50% fat / 50% CHO",
+      "C. RER = 1.00; 100% carbohydrate oxidation",
+      "D. RER = 0.90; primarily carbohydrate with some fat"
+    ],
+    answer: "A",
+    explanation: "RER = VCO₂ / VO₂ = 2.1 / 3.0 = 0.70. An RER of 0.70 indicates 100% fat oxidation. Fat contains a low ratio of oxygen atoms relative to carbon and hydrogen, so oxidizing fat produces much less CO₂ per O₂ consumed compared to carbohydrates."
+  },
+  {
+    question: "Bicarbonate secreted by the pancreas into the small intestine most directly enables:",
+    options: [
+      "A. Carbohydrate digestion by activating salivary amylase",
+      "B. All macronutrient digestion by neutralizing stomach acid to create optimal pH for pancreatic lipases, amylases, and proteases",
+      "C. Fat digestion only by emulsifying triglycerides",
+      "D. Protein digestion only by activating pepsin in the duodenum"
+    ],
+    answer: "B",
+    explanation: "Stomach acid (HCl, pH ~2) would denature all pancreatic enzymes. Bicarbonate raises duodenal pH to ~7–8, activating all three enzyme classes: pancreatic amylase (CHO), pancreatic lipase (FAT), and proteases (PRO). Without this neutralization, digestion of all macronutrients would be severely impaired."
+  },
+  {
+    question: "An athlete wants to simultaneously improve body composition and endurance performance. Which combined strategy is MOST evidence-based?",
+    options: [
+      "A. Zone 2 cardio exclusively + low protein diet",
+      "B. Resistance training + high protein (1.6–2.2 g/kg) + moderate caloric deficit + mixed-intensity endurance training",
+      "C. Maximal sprint training only + high carbohydrate diet",
+      "D. Prolonged fasted cardio + protein restriction"
+    ],
+    answer: "B",
+    explanation: "Body recomposition (fat loss + muscle gain) requires: resistance training to stimulate MPS + high protein to support muscle building + caloric deficit to drive fat loss. Adding mixed-intensity endurance training (including some high-intensity work for VO₂max) provides comprehensive adaptation. No single modality accomplishes all goals."
+  },
+  {
+    question: "Iron, calcium, sodium, and Vitamin D share which characteristic relevant to athletes?",
+    options: [
+      "A. All four provide direct calories when metabolized for energy",
+      "B. All four are commonly inadequate or require special attention in athletic populations and directly impact performance",
+      "C. All four are exclusively fat-soluble and stored in adipose tissue",
+      "D. All four are exclusively obtained from animal food sources"
+    ],
+    answer: "B",
+    explanation: "Iron deficiency → impaired O₂ transport and aerobic ATP production. Calcium deficiency → stress fractures and muscle dysfunction. Sodium losses in sweat → hyponatremia risk in endurance events. Vitamin D deficiency → reduced muscle performance, immune function, and bone health. All four are priority micronutrients in athlete nutrition assessment."
+  },
+  {
+    question: "Which sequence correctly describes complete fat digestion and aerobic ATP production from a dietary triglyceride?",
+    options: [
+      "A. Mouth (amylase) → Stomach (protease) → Blood → Adipose → Glycolysis → ATP",
+      "B. Small intestine (bile emulsification + lipase) → Blood as chylomicrons/FFA → IMTG/adipose → Lipolysis → Beta-oxidation → Acetyl-CoA → TCA → ETC → ATP",
+      "C. Stomach (HCl) → Small intestine (amylase) → Portal vein → Liver glycogen → Glycolysis → ATP",
+      "D. Mouth (lipase) → Stomach (bile) → Large intestine (absorption) → Muscle (glycolysis) → ATP"
+    ],
+    answer: "B",
+    explanation: "Fat digestion: bile salts (liver/gallbladder) emulsify fat → pancreatic lipase hydrolyzes triglycerides → absorbed as FFA/monoglycerides → reassembled into chylomicrons → enter lymph → blood. In muscle: stored as IMTG or from plasma FFA → lipolysis → beta-oxidation → Acetyl-CoA → TCA cycle → ETC → ~129 ATP (for palmitate)."
+  },
 ];
+
