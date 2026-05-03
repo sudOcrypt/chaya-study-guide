@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function Quiz({ questions, title }) {
   const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(null); // always stores just the letter: "A","B","C","D"
   const [submitted, setSubmitted] = useState(false);
   const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
@@ -11,19 +11,20 @@ export default function Quiz({ questions, title }) {
 
   const q = questions[current];
   const totalQ = questions.length;
-  // answers stores just the letter ("A","B","C","D") for reliable comparison
   const score = Object.entries(answers).filter(([i, a]) => questions[i].answer === a).length;
+
+  // Extract the letter ("A","B","C","D") from the start of the option string
+  const getLetter = (opt) => opt.trim().charAt(0).toUpperCase();
 
   const handleSelect = (opt) => {
     if (submitted) return;
-    setSelected(opt);
+    setSelected(getLetter(opt)); // store only the letter immediately on click
   };
 
   const handleSubmit = () => {
     if (!selected) return;
     setSubmitted(true);
-    // store only the letter so comparison with q.answer always works
-    setAnswers(prev => ({ ...prev, [current]: selected.charAt(0) }));
+    setAnswers(prev => ({ ...prev, [current]: selected }));
   };
 
   const handleNext = () => {
@@ -46,10 +47,14 @@ export default function Quiz({ questions, title }) {
     setReviewIndex(0);
   };
 
+  // selected is a letter; q.answer is a letter — all comparisons are letter vs letter
+  const isCorrect = selected === q.answer;
+
   const optionClass = (opt) => {
-    if (!submitted) return selected === opt ? 'option selected' : 'option';
-    if (opt.charAt(0) === q.answer) return 'option correct';
-    if (opt === selected && opt.charAt(0) !== q.answer) return 'option wrong';
+    const letter = getLetter(opt);
+    if (!submitted) return selected === letter ? 'option selected' : 'option';
+    if (letter === q.answer) return 'option correct';
+    if (letter === selected && letter !== q.answer) return 'option wrong';
     return 'option';
   };
 
@@ -82,7 +87,7 @@ export default function Quiz({ questions, title }) {
 
   if (review) {
     const rq = questions[reviewIndex];
-    const userAnswer = answers[reviewIndex];
+    const userLetter = answers[reviewIndex];
     return (
       <div className="quiz-review">
         <div className="review-header">
@@ -91,16 +96,19 @@ export default function Quiz({ questions, title }) {
         </div>
         <div className="question-text">{rq.question}</div>
         <div className="options-list">
-          {rq.options.map((opt) => (
-            <div key={opt} className={
-              opt.charAt(0) === rq.answer ? 'option correct' :
-              opt === userAnswer || opt.charAt(0) === userAnswer ? 'option wrong' : 'option'
-            }>
-              {opt}
-              {opt.charAt(0) === rq.answer && <span className="correct-label"> ← Correct</span>}
-              {opt.charAt(0) === userAnswer && opt.charAt(0) !== rq.answer && <span className="wrong-label"> ← Your Answer</span>}
-            </div>
-          ))}
+          {rq.options.map((opt) => {
+            const letter = getLetter(opt);
+            return (
+              <div key={opt} className={
+                letter === rq.answer ? 'option correct' :
+                letter === userLetter && letter !== rq.answer ? 'option wrong' : 'option'
+              }>
+                {opt}
+                {letter === rq.answer && <span className="correct-label"> ← Correct</span>}
+                {letter === userLetter && letter !== rq.answer && <span className="wrong-label"> ← Your Answer</span>}
+              </div>
+            );
+          })}
         </div>
         <div className="explanation">
           <strong>Explanation:</strong> {rq.explanation}
@@ -119,7 +127,7 @@ export default function Quiz({ questions, title }) {
         <h3>{title}</h3>
         <div className="quiz-progress">
           <div className="quiz-progress-bar">
-            <div style={{ width: `${((current) / totalQ) * 100}%` }} className="quiz-progress-fill" />
+            <div style={{ width: `${(current / totalQ) * 100}%` }} className="quiz-progress-fill" />
           </div>
           <span>Question {current + 1} of {totalQ}</span>
         </div>
@@ -141,7 +149,7 @@ export default function Quiz({ questions, title }) {
 
       {submitted && (
         <div className="explanation">
-          <strong>{answers[current] === q.answer ? '✓ Correct!' : `✗ Incorrect. The answer is ${q.answer}.`}</strong>
+          <strong>{isCorrect ? '✓ Correct!' : `✗ Incorrect. The correct answer is ${q.answer}.`}</strong>
           <br />{q.explanation}
         </div>
       )}
