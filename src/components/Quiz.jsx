@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { pickEncouragement } from '../data/encouragements';
 import { calculateScore, getOptionLetter, isAnswerCorrect } from '../utils/quizScoring';
 
 export default function Quiz({ questions, title }) {
@@ -9,6 +10,7 @@ export default function Quiz({ questions, title }) {
   const [showResults, setShowResults] = useState(false);
   const [review, setReview] = useState(false);
   const [reviewIndex, setReviewIndex] = useState(0);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const q = questions[current];
   const totalQ = questions.length;
@@ -21,6 +23,7 @@ export default function Quiz({ questions, title }) {
 
   const handleSubmit = () => {
     if (!selected) return;
+    setFeedbackMessage(pickEncouragement(isAnswerCorrect(selected, q.answer)));
     setSubmitted(true);
     setAnswers(prev => ({ ...prev, [current]: selected }));
   };
@@ -32,6 +35,7 @@ export default function Quiz({ questions, title }) {
       setCurrent(c => c + 1);
       setSelected(null);
       setSubmitted(false);
+      setFeedbackMessage('');
     }
   };
 
@@ -43,6 +47,7 @@ export default function Quiz({ questions, title }) {
     setShowResults(false);
     setReview(false);
     setReviewIndex(0);
+    setFeedbackMessage('');
   };
 
   const isCorrect = isAnswerCorrect(selected, q.answer);
@@ -151,6 +156,9 @@ export default function Quiz({ questions, title }) {
       {submitted && (
         <div className="explanation">
           <strong>{isCorrect ? '✓ Correct!' : `✗ Incorrect. The correct answer is ${q.answer}.`}</strong>
+          <div className={`personal-feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+            {feedbackMessage}
+          </div>
           <br />{q.explanation}
         </div>
       )}

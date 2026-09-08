@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { topics, combinedFlashcards, combinedQuiz } from './data/studyData';
+import { correctResponses, incorrectResponses } from './data/encouragements';
 import FlashcardDeck from './components/FlashcardDeck';
 import Quiz from './components/Quiz';
 import MatchingGame from './components/MatchingGame';
@@ -126,7 +127,37 @@ function HomeView({ setView, setSection }) {
           </div>
         </div>
       </div>
+
+      <MessageLibrary />
     </div>
+  );
+}
+
+function MessageLibrary() {
+  return (
+    <details className="message-library">
+      <summary>
+        <span>
+          <strong>Encouragement Message Library</strong>
+          <small>Read all 100 correct + 100 incorrect responses</small>
+        </span>
+        <span className="library-count">200 messages</span>
+      </summary>
+      <div className="message-columns">
+        <section>
+          <h2>When she gets it right 💜</h2>
+          <ol>
+            {correctResponses.map((response) => <li key={response}>{response}</li>)}
+          </ol>
+        </section>
+        <section>
+          <h2>When she is still learning 💛</h2>
+          <ol>
+            {incorrectResponses.map((response) => <li key={response}>{response}</li>)}
+          </ol>
+        </section>
+      </div>
+    </details>
   );
 }
 

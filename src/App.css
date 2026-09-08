@@ -179,6 +179,49 @@ body {
 .combined-card { border-color: #f59e0b55; }
 .combined-card .topic-title { color: #f59e0b; }
 
+/* ENCOURAGEMENT LIBRARY */
+.message-library {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 28px;
+  overflow: hidden;
+}
+.message-library[open] { border-color: #a78bfa; }
+.message-library summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  list-style: none;
+  padding: 18px 20px;
+}
+.message-library summary::-webkit-details-marker { display: none; }
+.message-library summary span:first-child { display: flex; flex-direction: column; }
+.message-library summary strong { color: var(--text); }
+.message-library summary small { color: var(--text-secondary); }
+.library-count {
+  background: #a78bfa20;
+  border: 1px solid #a78bfa55;
+  border-radius: 999px;
+  color: #c4b5fd;
+  flex-shrink: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+.message-columns {
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.message-columns section { padding: 22px 28px; }
+.message-columns section + section { border-left: 1px solid var(--border); }
+.message-columns h2 { font-size: 1rem; margin-bottom: 14px; }
+.message-columns ol { color: var(--text-secondary); padding-left: 24px; }
+.message-columns li { font-size: 0.82rem; line-height: 1.5; padding: 4px 0 4px 5px; }
+
 /* TOPIC VIEW */
 .topic-header {
   display: flex;
@@ -446,6 +489,21 @@ body {
   margin-bottom: 20px;
   padding: 14px 16px;
 }
+.personal-feedback {
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 10px;
+  padding: 10px 12px;
+}
+.personal-feedback.correct {
+  background: #10b98118;
+  color: #6ee7b7;
+}
+.personal-feedback.incorrect {
+  background: #f59e0b18;
+  color: #fcd34d;
+}
 .quiz-actions { display: flex; justify-content: center; }
 .btn-primary {
   background: #818cf8;
@@ -602,6 +660,9 @@ body {
 @media (max-width: 768px) {
   .topics-grid { grid-template-columns: 1fr; }
   .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+  .message-columns { grid-template-columns: 1fr; }
+  .message-columns section + section { border-left: 0; border-top: 1px solid var(--border); }
+  .message-library summary { align-items: flex-start; }
   .home-hero h1 { font-size: 1.6rem; }
   .header-inner { padding: 10px 16px; }
   .app-main { padding: 20px 16px 48px; }
