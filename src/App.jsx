@@ -19,9 +19,9 @@ export default function App() {
       <header className="app-header">
         <div className="header-inner">
           <button className="logo-btn" onClick={() => setView('home')}>
-            <span className="logo-icon">⚛️</span>
-            <span className="logo-text">Chaya Physics</span>
-            <span className="logo-sub">Exam 1 Study Guide</span>
+            <span className="logo-icon">💗</span>
+            <span className="logo-text">chaya's physics corner</span>
+            <span className="logo-sub">made with love (and a little panic)</span>
           </button>
           <nav className="header-nav">
             {topics.map(t => (
@@ -59,7 +59,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>Chaya Physics · Exam 1 Study Guide · {new Date().getFullYear()}</p>
+        <p>made for chaya with way too much love + a little physics ♡</p>
       </footer>
     </div>
   );
@@ -69,21 +69,25 @@ function HomeView({ setView, setSection }) {
   return (
     <div className="home-view">
       <div className="home-hero">
-        <div className="eyebrow">PHYSICS · EXAM 1</div>
-        <h1>Practice. Understand. Master.</h1>
-        <p className="hero-sub">Built directly from the 20-question practice exam. Review the equations, learn the concepts, and take the full test with worked explanations.</p>
+        <div className="eyebrow">hey babe, you've got this ♡</div>
+        <h1>physics, but <em>less scary</em></h1>
+        <p className="hero-sub">I put everything from your practice exam in one little place so you can study without digging through a million pages.</p>
+        <div className="love-note">
+          <span className="note-label">a note for you</span>
+          <p>No pressure to know everything right away. Take your time, trust that smart brain of yours, and remember I'm already proud of you.</p>
+        </div>
         <div className="hero-stats">
           <div className="hero-stat">
             <span className="stat-val">{combinedFlashcards.length}</span>
-            <span className="stat-lbl">Flashcards</span>
+            <span className="stat-lbl">little flashcards</span>
           </div>
           <div className="hero-stat">
             <span className="stat-val">{combinedQuiz.length}</span>
-            <span className="stat-lbl">Exam Questions</span>
+            <span className="stat-lbl">practice questions</span>
           </div>
           <div className="hero-stat">
             <span className="stat-val">{topics.length}</span>
-            <span className="stat-lbl">Study Units</span>
+            <span className="stat-lbl">cozy study sections</span>
           </div>
         </div>
       </div>
@@ -138,8 +142,8 @@ function MessageLibrary() {
     <details className="message-library">
       <summary>
         <span>
-          <strong>Encouragement Message Library</strong>
-          <small>Read all 100 correct + 100 incorrect responses</small>
+          <strong>the little things I might tell you ♡</strong>
+          <small>peek at all 100 right-answer + 100 keep-going messages</small>
         </span>
         <span className="library-count">200 messages</span>
       </summary>
