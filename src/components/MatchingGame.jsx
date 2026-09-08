@@ -1,7 +1,18 @@
 import { useState, useEffect } from 'react';
 
+function createItems(cards) {
+  return cards
+    .map((card, index) => [
+      { id: `q-${index}`, text: card.front.length > 80 ? `${card.front.substring(0, 77)}...` : card.front, pairId: index, type: 'q' },
+      { id: `a-${index}`, text: card.back.split('\n')[0].length > 80 ? `${card.back.split('\n')[0].substring(0, 77)}...` : card.back.split('\n')[0], pairId: index, type: 'a' },
+    ])
+    .flat()
+    .sort(() => Math.random() - 0.5);
+}
+
 export default function MatchingGame({ cards, title }) {
-  const [items, setItems] = useState([]);
+  const gameCards = cards.slice(0, 8);
+  const [items, setItems] = useState(() => createItems(gameCards));
   const [selected, setSelected] = useState(null);
   const [matched, setMatched] = useState(new Set());
   const [wrong, setWrong] = useState(null);
@@ -10,15 +21,8 @@ export default function MatchingGame({ cards, title }) {
   const [elapsed, setElapsed] = useState(0);
   const [done, setDone] = useState(false);
 
-  const gameCards = cards.slice(0, 8);
-
   const initGame = () => {
-    const pairs = gameCards.map((c, i) => [
-      { id: `q-${i}`, text: c.front.length > 80 ? c.front.substring(0, 77) + '...' : c.front, pairId: i, type: 'q' },
-      { id: `a-${i}`, text: c.back.split('\n')[0].length > 80 ? c.back.split('\n')[0].substring(0, 77) + '...' : c.back.split('\n')[0], pairId: i, type: 'a' }
-    ]).flat();
-    const shuffled = pairs.sort(() => Math.random() - 0.5);
-    setItems(shuffled);
+    setItems(createItems(gameCards));
     setSelected(null);
     setMatched(new Set());
     setWrong(null);
@@ -27,10 +31,6 @@ export default function MatchingGame({ cards, title }) {
     setElapsed(0);
     setDone(false);
   };
-
-  useEffect(() => {
-    initGame();
-  }, []);
 
   useEffect(() => {
     if (!startTime || done) return;

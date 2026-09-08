@@ -52,11 +52,6 @@ export default function FlashcardDeck({ cards, title }) {
     }, 200);
   };
 
-  const shuffle = () => {
-    setCurrent(0);
-    setFlipped(false);
-  };
-
   return (
     <div className="flashcard-deck">
       <div className="deck-header">

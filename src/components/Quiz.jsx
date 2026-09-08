@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { calculateScore, getOptionLetter, isAnswerCorrect } from '../utils/quizScoring';
 
 export default function Quiz({ questions, title }) {
   const [current, setCurrent] = useState(0);
@@ -11,14 +12,11 @@ export default function Quiz({ questions, title }) {
 
   const q = questions[current];
   const totalQ = questions.length;
-  const score = Object.entries(answers).filter(([i, a]) => questions[i].answer === a).length;
-
-  // Extract the letter ("A","B","C","D") from the start of the option string
-  const getLetter = (opt) => opt.trim().charAt(0).toUpperCase();
+  const score = calculateScore(questions, answers);
 
   const handleSelect = (opt) => {
     if (submitted) return;
-    setSelected(getLetter(opt)); // store only the letter immediately on click
+    setSelected(getOptionLetter(opt)); // persist one normalized value from click through scoring
   };
 
   const handleSubmit = () => {
@@ -47,14 +45,13 @@ export default function Quiz({ questions, title }) {
     setReviewIndex(0);
   };
 
-  // selected is a letter; q.answer is a letter — all comparisons are letter vs letter
-  const isCorrect = selected === q.answer;
+  const isCorrect = isAnswerCorrect(selected, q.answer);
 
   const optionClass = (opt) => {
-    const letter = getLetter(opt);
+    const letter = getOptionLetter(opt);
     if (!submitted) return selected === letter ? 'option selected' : 'option';
-    if (letter === q.answer) return 'option correct';
-    if (letter === selected && letter !== q.answer) return 'option wrong';
+    if (isAnswerCorrect(letter, q.answer)) return 'option correct';
+    if (letter === selected && !isAnswerCorrect(letter, q.answer)) return 'option wrong';
     return 'option';
   };
 
@@ -70,10 +67,10 @@ export default function Quiz({ questions, title }) {
         </div>
         <div className="result-breakdown">
           {questions.map((q, i) => (
-            <div key={i} className={`result-item ${answers[i] === q.answer ? 'correct' : 'wrong'}`}>
+            <div key={q.number ?? i} className={`result-item ${isAnswerCorrect(answers[i], q.answer) ? 'correct' : 'wrong'}`}>
               <span className="result-num">Q{i + 1}</span>
               <span className="result-text">{q.question.substring(0, 60)}...</span>
-              <span className="result-verdict">{answers[i] === q.answer ? '✓' : '✗'}</span>
+              <span className="result-verdict">{isAnswerCorrect(answers[i], q.answer) ? '✓' : '✗'}</span>
             </div>
           ))}
         </div>
@@ -95,17 +92,18 @@ export default function Quiz({ questions, title }) {
           <button className="btn-back" onClick={() => setReview(false)}>← Results</button>
         </div>
         <div className="question-text">{rq.question}</div>
+        {rq.image && <img className="question-image" src={rq.image} alt={`Diagram for question ${rq.number ?? reviewIndex + 1}`} />}
         <div className="options-list">
           {rq.options.map((opt) => {
-            const letter = getLetter(opt);
+            const letter = getOptionLetter(opt);
             return (
               <div key={opt} className={
-                letter === rq.answer ? 'option correct' :
-                letter === userLetter && letter !== rq.answer ? 'option wrong' : 'option'
+                isAnswerCorrect(letter, rq.answer) ? 'option correct' :
+                letter === userLetter && !isAnswerCorrect(letter, rq.answer) ? 'option wrong' : 'option'
               }>
                 {opt}
-                {letter === rq.answer && <span className="correct-label"> ← Correct</span>}
-                {letter === userLetter && letter !== rq.answer && <span className="wrong-label"> ← Your Answer</span>}
+                {isAnswerCorrect(letter, rq.answer) && <span className="correct-label"> ← Correct</span>}
+                {letter === userLetter && !isAnswerCorrect(letter, rq.answer) && <span className="wrong-label"> ← Your Answer</span>}
               </div>
             );
           })}
@@ -134,16 +132,19 @@ export default function Quiz({ questions, title }) {
       </div>
 
       <div className="question-text">{q.question}</div>
+      {q.image && <img className="question-image" src={q.image} alt={`Diagram for question ${q.number ?? current + 1}`} />}
 
       <div className="options-list">
         {q.options.map((opt) => (
-          <div
+          <button
+            type="button"
             key={opt}
             className={optionClass(opt)}
             onClick={() => handleSelect(opt)}
+            disabled={submitted}
           >
             {opt}
-          </div>
+          </button>
         ))}
       </div>
 

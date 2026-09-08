@@ -18,9 +18,9 @@ export default function App() {
       <header className="app-header">
         <div className="header-inner">
           <button className="logo-btn" onClick={() => setView('home')}>
-            <span className="logo-icon">📚</span>
-            <span className="logo-text">Nutrition & Sport Science</span>
-            <span className="logo-sub">Final Exam Study Guide</span>
+            <span className="logo-icon">⚛️</span>
+            <span className="logo-text">Chaya Physics</span>
+            <span className="logo-sub">Exam 1 Study Guide</span>
           </button>
           <nav className="header-nav">
             {topics.map(t => (
@@ -37,7 +37,7 @@ export default function App() {
               className={`nav-pill combined ${view === 'combined' ? 'active' : ''}`}
               onClick={() => { setView('combined'); setSection('flashcards'); }}
             >
-              Full Review
+              Practice Exam
             </button>
           </nav>
         </div>
@@ -58,7 +58,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>Nutrition & Sport Science · Final Exam Study Guide · {new Date().getFullYear()}</p>
+        <p>Chaya Physics · Exam 1 Study Guide · {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
@@ -68,20 +68,21 @@ function HomeView({ setView, setSection }) {
   return (
     <div className="home-view">
       <div className="home-hero">
-        <h1>Final Exam Study Guide</h1>
-        <p className="hero-sub">Comprehensive review of all 6 lecture topics. Flashcards, quizzes, and matching games for each unit — plus a complete combined review.</p>
+        <div className="eyebrow">PHYSICS · EXAM 1</div>
+        <h1>Practice. Understand. Master.</h1>
+        <p className="hero-sub">Built directly from the 20-question practice exam. Review the equations, learn the concepts, and take the full test with worked explanations.</p>
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="stat-val">{topics.reduce((a, t) => a + t.flashcards.length, 0) + combinedFlashcards.length}</span>
-            <span className="stat-lbl">Total Flashcards</span>
+            <span className="stat-val">{combinedFlashcards.length}</span>
+            <span className="stat-lbl">Flashcards</span>
           </div>
           <div className="hero-stat">
-            <span className="stat-val">{topics.reduce((a, t) => a + t.quiz.length, 0) + combinedQuiz.length}</span>
-            <span className="stat-lbl">Total Quiz Questions</span>
+            <span className="stat-val">{combinedQuiz.length}</span>
+            <span className="stat-lbl">Exam Questions</span>
           </div>
           <div className="hero-stat">
-            <span className="stat-val">6</span>
-            <span className="stat-lbl">Topics Covered</span>
+            <span className="stat-val">{topics.length}</span>
+            <span className="stat-lbl">Study Units</span>
           </div>
         </div>
       </div>
@@ -111,17 +112,17 @@ function HomeView({ setView, setSection }) {
         <div className="topic-card combined-card">
           <div className="topic-card-header">
             <span className="topic-icon">🎯</span>
-            <h2 className="topic-title">Full Combined Review</h2>
+            <h2 className="topic-title">Full Practice Exam</h2>
           </div>
-          <p className="topic-summary-preview">All 6 topics combined into one comprehensive flashcard deck and quiz with the hardest college-level questions.</p>
+          <p className="topic-summary-preview">Take all 20 PDF questions in order, see immediate feedback, then review every worked solution.</p>
           <div className="topic-card-meta">
             <span>{combinedFlashcards.length} flashcards</span>
             <span>{combinedQuiz.length} questions</span>
-            <span>All topics</span>
+            <span>All 4 units</span>
           </div>
           <div className="topic-card-actions">
             <button className="card-btn flash" onClick={() => { setView('combined'); setSection('flashcards'); }}>Flashcards</button>
-            <button className="card-btn quiz" onClick={() => { setView('combined'); setSection('quiz'); }}>Full Quiz</button>
+            <button className="card-btn quiz" onClick={() => { setView('combined'); setSection('quiz'); }}>Start Exam</button>
           </div>
         </div>
       </div>
@@ -176,7 +177,7 @@ function NotesSection({ topic }) {
     <div className="notes-section">
       <div className="notes-intro">
         <h2>Key Concepts: {topic.title}</h2>
-        <p>Click each section to expand. These notes cover all major exam topics from the lecture slides.</p>
+        <p>Click each section to expand. These notes target the concepts and equations used on the practice exam.</p>
       </div>
       <div className="accordion">
         {topic.summary.map((item, i) => (
@@ -204,8 +205,8 @@ function CombinedView({ section, setSection }) {
       <div className="topic-header combined-header">
         <span className="topic-view-icon">🎯</span>
         <div>
-          <h1 className="topic-view-title">Full Combined Review</h1>
-          <p className="topic-view-meta">{combinedFlashcards.length} flashcards · {combinedQuiz.length} quiz questions · All 6 topics</p>
+          <h1 className="topic-view-title">Full Practice Exam</h1>
+          <p className="topic-view-meta">{combinedFlashcards.length} flashcards · {combinedQuiz.length} questions · All 4 units</p>
         </div>
       </div>
 
@@ -222,8 +223,8 @@ function CombinedView({ section, setSection }) {
       </div>
 
       <div className="section-content">
-        {section === 'flashcards' && <FlashcardDeck key="combined-flash" cards={combinedFlashcards} title="Combined Review Flashcards" />}
-        {section === 'quiz' && <Quiz key="combined-quiz" questions={combinedQuiz} title="Full Final Exam Review Quiz" />}
+        {section === 'flashcards' && <FlashcardDeck key="combined-flash" cards={combinedFlashcards} title="Exam 1 Review Flashcards" />}
+        {section === 'quiz' && <Quiz key="combined-quiz" questions={combinedQuiz} title="Physics Exam 1 Practice Test" />}
       </div>
     </div>
   );
