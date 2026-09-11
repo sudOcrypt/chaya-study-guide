@@ -7,6 +7,7 @@ import {
   lectureLessons,
   lectureQuiz,
 } from './lectureData.js';
+import { lectureExamples } from './lectureExamples.js';
 import { getOptionLetter, isAnswerCorrect } from '../utils/quizScoring.js';
 
 test('includes all lecture sources and a guided example for every lesson', () => {
@@ -40,5 +41,24 @@ test('every lecture quiz answer maps to an option and scores correctly', () => {
     );
     assert.ok(option, `Lecture question ${index + 1} must include ${question.answer}`);
     assert.equal(isAnswerCorrect(getOptionLetter(option), question.answer), true);
+  });
+});
+
+test('every lecture-slide question has a complete narrated walkthrough', () => {
+  assert.equal(lectureExamples.length, 19);
+  assert.equal(new Set(lectureExamples.map((example) => example.id)).size, 19);
+
+  lectureExamples.forEach((example) => {
+    assert.ok(example.source);
+    assert.ok(example.prompt);
+    assert.ok(example.idea);
+    assert.ok(example.knowns.length >= 2);
+    assert.ok(example.find);
+    assert.ok(example.axis);
+    assert.ok(example.formulas.length >= 1);
+    assert.ok(example.steps.length >= 4);
+    assert.ok(example.steps.every((step) => step.title && step.body));
+    assert.ok(example.answer);
+    assert.ok(example.check);
   });
 });

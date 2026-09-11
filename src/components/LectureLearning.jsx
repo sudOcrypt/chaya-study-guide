@@ -9,6 +9,7 @@ import {
   symbolGlossary,
   universalProblemSteps,
 } from '../data/lectureData';
+import { lectureExamples } from '../data/lectureExamples';
 import FlashcardDeck from './FlashcardDeck';
 import Quiz from './Quiz';
 
@@ -16,6 +17,7 @@ const PANELS = [
   { id: 'basics', label: 'Start From Zero' },
   { id: 'path', label: 'Learning Path' },
   { id: 'lessons', label: 'Guided Lessons' },
+  { id: 'examples', label: `Slide Examples (${lectureExamples.length})` },
   { id: 'formulas', label: 'Formula Sheet' },
   { id: 'flashcards', label: 'Flashcards' },
   { id: 'quiz', label: 'Check Yourself' },
@@ -61,6 +63,7 @@ export default function LectureLearning() {
         {panel === 'basics' && <StartFromZero onContinue={() => setPanel('path')} />}
         {panel === 'path' && <LearningPath onOpen={setPanel} />}
         {panel === 'lessons' && <GuidedLessons />}
+        {panel === 'examples' && <WorkedExamples />}
         {panel === 'formulas' && <FormulaSheet />}
         {panel === 'flashcards' && (
           <FlashcardDeck
@@ -192,6 +195,7 @@ function LearningPath({ onOpen }) {
 
       <div className="path-actions">
         <button onClick={() => onOpen('lessons')}>Start the guided lessons →</button>
+        <button onClick={() => onOpen('examples')}>Walk through every slide example</button>
         <button onClick={() => onOpen('formulas')}>Open the formula sheet</button>
       </div>
     </div>
@@ -263,6 +267,112 @@ function GuidedLessons() {
           <span>watch out for this</span>
           <p>{lesson.trap}</p>
         </div>
+      </article>
+    </div>
+  );
+}
+
+function WorkedExamples() {
+  const [activeId, setActiveId] = useState(lectureExamples[0].id);
+  const activeIndex = lectureExamples.findIndex((example) => example.id === activeId);
+  const example = lectureExamples[activeIndex];
+
+  const move = (direction) => {
+    const nextIndex = Math.min(
+      lectureExamples.length - 1,
+      Math.max(0, activeIndex + direction),
+    );
+    setActiveId(lectureExamples[nextIndex].id);
+  };
+
+  return (
+    <div className="worked-library">
+      <aside className="example-nav">
+        <div>
+          <span>all slide questions</span>
+          <p>Select any problem. Nothing is hidden or skipped.</p>
+        </div>
+        {lectureExamples.map((item, index) => (
+          <button
+            key={item.id}
+            className={item.id === activeId ? 'active' : ''}
+            onClick={() => setActiveId(item.id)}
+          >
+            <small>{String(index + 1).padStart(2, '0')}</small>
+            <span><b>{item.title}</b>{item.source}</span>
+          </button>
+        ))}
+      </aside>
+
+      <article className="example-page">
+        <header>
+          <span>{example.source} · example {activeIndex + 1} of {lectureExamples.length}</span>
+          <h2>{example.title}</h2>
+          <p>{example.prompt}</p>
+        </header>
+
+        <section className="example-first-thought">
+          <span>What is this really asking?</span>
+          <p>{example.idea}</p>
+        </section>
+
+        <div className="example-setup-grid">
+          <section>
+            <h3>What we know</h3>
+            <ul>{example.knowns.map((known) => <li key={known}>{known}</li>)}</ul>
+          </section>
+          <section>
+            <h3>What we need</h3>
+            <p>{example.find}</p>
+          </section>
+          <section>
+            <h3>Signs and direction</h3>
+            <p>{example.axis}</p>
+          </section>
+        </div>
+
+        <section className="formula-choice">
+          <div>
+            <span>choose before calculating</span>
+            <h3>Which formula—and why?</h3>
+          </div>
+          {example.formulas.map((formula) => (
+            <article key={formula.equation}>
+              <strong>{formula.equation}</strong>
+              <p>{formula.why}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="tiny-walkthrough">
+          <div>
+            <span>slow walkthrough</span>
+            <h3>Every step, one at a time</h3>
+          </div>
+          <ol>
+            {example.steps.map((step, index) => (
+              <li key={`${step.title}-${index}`}>
+                <span>{index + 1}</span>
+                <div>
+                  <h4>{step.title}</h4>
+                  {step.math && <code>{step.math}</code>}
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="example-final">
+          <div><span>final answer</span><p>{example.answer}</p></div>
+          <div><span>does it make sense?</span><p>{example.check}</p></div>
+        </section>
+
+        <nav className="example-pager" aria-label="Worked example navigation">
+          <button disabled={activeIndex === 0} onClick={() => move(-1)}>← Previous example</button>
+          <span>{activeIndex + 1} / {lectureExamples.length}</span>
+          <button disabled={activeIndex === lectureExamples.length - 1} onClick={() => move(1)}>Next example →</button>
+        </nav>
       </article>
     </div>
   );
