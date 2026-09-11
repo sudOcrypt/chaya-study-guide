@@ -10,7 +10,7 @@ import {
 import { getOptionLetter, isAnswerCorrect } from '../utils/quizScoring.js';
 
 test('includes all lecture sources and a guided example for every lesson', () => {
-  assert.equal(lectureLessons.length, 6);
+  assert.equal(lectureLessons.length, 8);
   assert.ok(lectureLessons.some((lesson) => lesson.source.includes('08/26')));
   assert.ok(lectureLessons.some((lesson) => lesson.source.includes('08/31A')));
   assert.ok(lectureLessons.some((lesson) => lesson.source.includes('08/31B')));
@@ -22,18 +22,18 @@ test('includes all lecture sources and a guided example for every lesson', () =>
   });
 });
 
-test('formula reference covers the four source categories', () => {
-  assert.equal(lectureFormulas.length, 4);
+test('formula reference covers every lecture and formula-sheet category', () => {
+  assert.equal(lectureFormulas.length, 5);
   lectureFormulas.forEach((group) => assert.ok(group.formulas.length >= 4));
 });
 
 test('lecture flashcards are unique', () => {
-  assert.equal(lectureFlashcards.length, 18);
-  assert.equal(new Set(lectureFlashcards.map((card) => card.front)).size, 18);
+  assert.equal(lectureFlashcards.length, 24);
+  assert.equal(new Set(lectureFlashcards.map((card) => card.front)).size, 24);
 });
 
 test('every lecture quiz answer maps to an option and scores correctly', () => {
-  assert.equal(lectureQuiz.length, 12);
+  assert.equal(lectureQuiz.length, 16);
   lectureQuiz.forEach((question, index) => {
     const option = question.options.find(
       (candidate) => getOptionLetter(candidate) === question.answer,

@@ -5,11 +5,15 @@ import {
   lectureFormulas,
   lectureLessons,
   lectureQuiz,
+  physicsBasics,
+  symbolGlossary,
+  universalProblemSteps,
 } from '../data/lectureData';
 import FlashcardDeck from './FlashcardDeck';
 import Quiz from './Quiz';
 
 const PANELS = [
+  { id: 'basics', label: 'Start From Zero' },
   { id: 'path', label: 'Learning Path' },
   { id: 'lessons', label: 'Guided Lessons' },
   { id: 'formulas', label: 'Formula Sheet' },
@@ -18,7 +22,7 @@ const PANELS = [
 ];
 
 export default function LectureLearning() {
-  const [panel, setPanel] = useState('path');
+  const [panel, setPanel] = useState('basics');
 
   return (
     <div className="lecture-learning">
@@ -28,7 +32,7 @@ export default function LectureLearning() {
           <h1>Learn the <em>why</em>, not just the formula.</h1>
           <p>
             Everything from the August 26 and August 31 lectures, plus the Exam 1
-            formula sheet, broken into one guided path.
+            formula sheet, explained with no assumed physics knowledge and no skipped steps.
           </p>
         </div>
         <div className="lecture-source-list">
@@ -54,6 +58,7 @@ export default function LectureLearning() {
       </div>
 
       <div className="lecture-panel">
+        {panel === 'basics' && <StartFromZero onContinue={() => setPanel('path')} />}
         {panel === 'path' && <LearningPath onOpen={setPanel} />}
         {panel === 'lessons' && <GuidedLessons />}
         {panel === 'formulas' && <FormulaSheet />}
@@ -72,6 +77,73 @@ export default function LectureLearning() {
           />
         )}
       </div>
+    </div>
+  );
+}
+
+function StartFromZero({ onContinue }) {
+  return (
+    <div className="start-zero">
+      <div className="zero-intro">
+        <span>begin here</span>
+        <h2>First, what do all these words mean?</h2>
+        <p>
+          This section assumes nothing. Read one box at a time. The short sentence
+          is the idea; the paragraph underneath explains exactly what it means.
+        </p>
+      </div>
+
+      <div className="basic-concepts">
+        {physicsBasics.map((item) => (
+          <article key={item.word}>
+            <span>{item.icon}</span>
+            <div>
+              <h3>{item.word}</h3>
+              <strong>{item.tinyVersion}</strong>
+              <p>{item.details}</p>
+              <small><b>Example:</b> {item.example}</small>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <section className="symbol-section">
+        <div>
+          <span>symbol decoder</span>
+          <h2>What every letter means.</h2>
+          <p>A letter is only a short label for a physical idea. It is not a new kind of math.</p>
+        </div>
+        <div className="symbol-list">
+          <div className="symbol-row symbol-head">
+            <strong>Symbol</strong><strong>Meaning</strong><strong>Unit</strong>
+          </div>
+          {symbolGlossary.map(([symbol, meaning, unit]) => (
+            <div className="symbol-row" key={symbol}>
+              <strong>{symbol}</strong><span>{meaning}</span><small>{unit}</small>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="universal-steps">
+        <div className="zero-intro">
+          <span>use this every time</span>
+          <h2>Seven tiny steps for any problem.</h2>
+          <p>Do not jump straight to an equation. Moving in this order prevents most mistakes.</p>
+        </div>
+        <div>
+          {universalProblemSteps.map((step, index) => (
+            <article key={step.title}>
+              <span>{index + 1}</span>
+              <p><strong>{step.title}</strong>{step.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <button className="zero-continue" onClick={onContinue}>
+        I understand the basic words—show me the learning path →
+      </button>
     </div>
   );
 }
@@ -240,6 +312,15 @@ function FormulaSheet() {
           </section>
         ))}
       </div>
+
+      <section className="formula-symbol-reminder">
+        <h3>Before using any equation</h3>
+        <p>
+          Δ means final minus initial. A subscript 0 or i means “at the start.”
+          A subscript f means “at the end.” x describes horizontal motion and y
+          describes vertical motion. The same equation shape works on either axis.
+        </p>
+      </section>
 
       <div className="formula-rules">
         <h3>Four rules that prevent most mistakes</h3>

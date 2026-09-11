@@ -1,3 +1,128 @@
+export const physicsBasics = [
+  {
+    icon: '📏',
+    word: 'A number needs a unit',
+    tinyVersion: 'The number tells “how much.” The unit tells “how much of what.”',
+    details: 'Writing 5 alone is incomplete. It could mean 5 seconds, 5 meters, or 5 meters per second. In physics, carry the unit through every calculation. Units also help you catch mistakes.',
+    example: '3 m/s means an object changes its position by 3 meters during each second.',
+  },
+  {
+    icon: '🎯',
+    word: 'Origin, axis & positive direction',
+    tinyVersion: 'Pick a zero point, draw a line, and decide which way counts as plus.',
+    details: 'The origin is position zero. The axis is the numbered line. The positive direction is your chosen “plus” direction. Right or up is usually positive, but you may choose differently if you stay consistent.',
+    example: 'If right is positive, 4 m means 4 m right of zero and −4 m means 4 m left of zero.',
+  },
+  {
+    icon: '📍',
+    word: 'Position, distance & displacement',
+    tinyVersion: 'Position is where you are. Distance is the whole path. Displacement is where you ended compared with where you began.',
+    details: 'Position is a coordinate. Distance ignores direction and cannot be negative. Displacement is final position minus initial position, so it can be positive, negative, or zero.',
+    example: 'Walk 3 m right and 3 m left: distance = 6 m, displacement = 0 m.',
+  },
+  {
+    icon: '⏱️',
+    word: 'Time & a time interval',
+    tinyVersion: 'A time is what the clock says. A time interval is how long something lasted.',
+    details: 'Initial time is ti. Final time is tf. Elapsed time is Δt = tf − ti. The triangle symbol Δ is read “change in.”',
+    example: 'Starting at 2 s and ending at 7 s gives Δt = 7 − 2 = 5 s.',
+  },
+  {
+    icon: '🚲',
+    word: 'Speed & velocity',
+    tinyVersion: 'Speed says how fast. Velocity says how fast and which way.',
+    details: 'Speed is a scalar, so it has no direction. Velocity is a vector, so its sign or stated direction matters. Average velocity uses displacement, while average speed uses total distance.',
+    example: '“5 m/s” is speed. “5 m/s east” is velocity.',
+  },
+  {
+    icon: '🏎️',
+    word: 'Acceleration',
+    tinyVersion: 'Acceleration tells how quickly velocity changes.',
+    details: 'An object accelerates when it speeds up, slows down, or changes direction. Acceleration is not the same thing as velocity. A fast object can have zero acceleration if its velocity stays unchanged.',
+    example: 'Going from 2 m/s to 8 m/s in 3 s gives a = (8 − 2)/3 = 2 m/s².',
+  },
+  {
+    icon: '📈',
+    word: 'Slope & area on graphs',
+    tinyVersion: 'Slope means “how fast the vertical value changes.” Area means the space under a graph.',
+    details: 'On a position–time graph, slope is velocity. On a velocity–time graph, slope is acceleration. The signed area under a velocity–time graph is displacement.',
+    example: 'A horizontal v–t line at 4 m/s for 3 s makes a rectangle with area 4 × 3 = 12 m.',
+  },
+  {
+    icon: '🧭',
+    word: 'Scalars, vectors & components',
+    tinyVersion: 'A vector is an arrow. Components describe how much of that arrow points sideways and vertically.',
+    details: 'The arrow length represents magnitude, and the arrowhead shows direction. Ax and Ay are not new vectors; they are the x and y pieces of vector A.',
+    example: 'A northeast velocity has a positive x-component and a positive y-component.',
+  },
+  {
+    icon: '🍎',
+    word: 'Gravity & free fall',
+    tinyVersion: 'Near Earth, gravity changes downward velocity by about 9.8 m/s every second.',
+    details: 'Free fall means gravity is the only force affecting the motion. If up is positive, gravity is negative: ay = −9.80 m/s². This acceleration stays downward while an object rises, pauses, and falls.',
+    example: 'A dropped object starts at 0 m/s, then is moving about 9.8 m/s downward after 1 s.',
+  },
+  {
+    icon: '🔺',
+    word: 'Angles & trigonometry',
+    tinyVersion: 'Sine and cosine split a slanted arrow into straight horizontal and vertical pieces.',
+    details: 'When θ is measured from the x-axis, cosine gives the adjacent x-piece and sine gives the opposite y-piece. The quadrant decides whether each component is positive or negative.',
+    example: 'For A = 10 at 30° above +x: Ax = 10 cos 30° = 8.66 and Ay = 10 sin 30° = 5.00.',
+  },
+];
+
+export const symbolGlossary = [
+  ['x or y', 'position', 'meters (m)'],
+  ['x₀, xi or y₀, yi', 'initial position—the starting coordinate', 'meters (m)'],
+  ['xf or yf', 'final position—the ending coordinate', 'meters (m)'],
+  ['Δ', '“change in,” always final value minus initial value', 'no unit by itself'],
+  ['Δx or Δy', 'displacement', 'meters (m)'],
+  ['t', 'time or elapsed time, depending on the equation', 'seconds (s)'],
+  ['ti and tf', 'initial and final clock times', 'seconds (s)'],
+  ['Δt', 'time interval: tf − ti', 'seconds (s)'],
+  ['v or vf', 'velocity now or final velocity', 'meters per second (m/s)'],
+  ['v₀ or vi', 'initial velocity—the velocity at the start', 'meters per second (m/s)'],
+  ['vavg', 'average velocity', 'meters per second (m/s)'],
+  ['a', 'acceleration', 'meters per second per second (m/s²)'],
+  ['g', 'magnitude of gravitational acceleration near Earth: 9.80', 'm/s²'],
+  ['A, B, R', 'vector names; R usually means resultant or total vector', 'depends on the vector'],
+  ['Ax and Ay', 'x- and y-components of vector A', 'same unit as A'],
+  ['θ', 'theta, a symbol used for an angle', 'degrees (°) here'],
+  ['Σ', 'sigma, meaning “add all of these”', 'depends on what is added'],
+  ['|A|', 'magnitude or size of vector A', 'same unit as A'],
+];
+
+export const universalProblemSteps = [
+  {
+    title: 'Translate the story',
+    detail: 'Write what is happening in plain words. Is it moving, stopping, falling, turning, or combining directions?',
+  },
+  {
+    title: 'Choose plus',
+    detail: 'Draw an axis. Mark the positive direction. Every directional sign comes from this choice.',
+  },
+  {
+    title: 'List knowns',
+    detail: 'Write each given number beside its symbol, sign, and unit. Also write the one thing the question asks for.',
+  },
+  {
+    title: 'Choose one relationship',
+    detail: 'Find an equation or graph rule containing the known values and only one unknown.',
+  },
+  {
+    title: 'Substitute with units',
+    detail: 'Replace symbols with numbers carefully. Keep negative signs in parentheses.',
+  },
+  {
+    title: 'Solve, then explain',
+    detail: 'Calculate, attach the unit, and state what the sign means in an ordinary sentence.',
+  },
+  {
+    title: 'Reality check',
+    detail: 'Ask whether the size, direction, and unit are reasonable. A strange answer usually points to a sign or unit mistake.',
+  },
+];
+
 export const lectureLessons = [
   {
     id: 'position',
@@ -145,6 +270,60 @@ export const lectureLessons = [
     },
     trap: 'A calculator can return a reference angle but cannot decide the correct quadrant for you. Use the component signs.',
   },
+  {
+    id: 'projectiles-relative',
+    source: 'Exam 1 formula sheet',
+    icon: '🏀',
+    title: 'Projectiles & relative motion',
+    bigIdea: 'The same motion can be split into directions or described from different observers.',
+    explanation: [
+      'A projectile moves horizontally and vertically at the same time. Treat those directions as two separate problems that share one clock.',
+      'Without air resistance, horizontal acceleration is zero, so horizontal velocity stays constant. Vertically, gravity creates ay = −g when up is positive.',
+      'Relative velocity answers “how fast does A look from B?” Add the velocity of A relative to B to the velocity of B relative to the ground or another observer.',
+      'A reference frame is simply the observer whose point of view you use. The object does not suddenly change its real motion; the description changes with the observer.',
+    ],
+    keyIdeas: [
+      'Projectile x-motion: ax = 0 and vx is constant',
+      'Projectile y-motion: ay = −g',
+      'Horizontal and vertical motion use the same elapsed time',
+      'vA/C = vA/B + vB/C for relative velocity',
+    ],
+    example: {
+      prompt: 'A person walks forward at 2 m/s inside a train moving forward at 15 m/s. How fast does the person move relative to the ground?',
+      setup: 'Person relative to train = +2 m/s. Train relative to ground = +15 m/s.',
+      work: 'vperson/ground = vperson/train + vtrain/ground = 2 + 15 = 17 m/s',
+      answer: 'A person standing on the ground sees the walker moving forward at 17 m/s.',
+    },
+    trap: 'Do not use two different times for the x- and y-parts of one projectile flight. Both motions happen simultaneously.',
+  },
+  {
+    id: 'math-tools',
+    source: 'Exam 1 formula sheet',
+    icon: '🧰',
+    title: 'The math toolbox',
+    bigIdea: 'The formula sheet includes math tools because physics often turns pictures and motion into triangles, areas, and quadratics.',
+    explanation: [
+      'Rectangle area is length × width. On a velocity–time graph, that becomes velocity × time and produces displacement.',
+      'Triangle area is ½ × base × height. Sloped parts of a velocity–time graph often form triangles.',
+      'The Pythagorean theorem combines perpendicular x- and y-components: hypotenuse² = horizontal² + vertical².',
+      'Sine, cosine, and tangent connect an angle to a right triangle. SOH-CAH-TOA means sin = opposite/hypotenuse, cos = adjacent/hypotenuse, and tan = opposite/adjacent.',
+      'The quadratic formula solves equations containing t² when the expression cannot be rearranged with a simple square root. A negative time answer is usually rejected when asking what happens after t = 0.',
+    ],
+    keyIdeas: [
+      'Rectangle area = length × width',
+      'Triangle area = ½ × base × height',
+      'c² = a² + b² for a right triangle',
+      'sin θ = opposite/hypotenuse; cos θ = adjacent/hypotenuse',
+      'Quadratic formula: t = (−b ± √(b² − 4ac)) / 2a',
+    ],
+    example: {
+      prompt: 'A v–t graph rises in a straight line from 0 to 6 m/s during 4 s. What displacement occurs?',
+      setup: 'The region under the graph is a triangle with base 4 s and height 6 m/s.',
+      work: 'Area = ½(base)(height) = ½(4 s)(6 m/s) = 12 m',
+      answer: 'The displacement is 12 m. The seconds cancel with “per second,” leaving meters.',
+    },
+    trap: 'Your calculator must be in degree mode when the problem gives angles in degrees. Radian mode produces a different answer.',
+  },
 ];
 
 export const lectureFormulas = [
@@ -189,6 +368,21 @@ export const lectureFormulas = [
       { equation: 't = (−b ± √(b²−4ac)) / 2a', use: 'Quadratic in time', note: 'Reject nonphysical roots.' },
     ],
   },
+  {
+    group: 'Relative motion, graph area & trig',
+    color: '#de7791',
+    formulas: [
+      { equation: 'vA/C = vA/B + vB/C', use: 'Change reference frames', note: 'Keep directional signs.' },
+      { equation: 'Arectangle = length × width', use: 'Flat section of a graph', note: 'On v–t: velocity × time.' },
+      { equation: 'Atriangle = ½(base)(height)', use: 'Sloped section of a graph', note: 'Keep the area sign.' },
+      { equation: 'c² = a² + b²', use: 'Right triangles', note: 'c is the hypotenuse.' },
+      { equation: 'sin θ = opposite / hypotenuse', use: 'Opposite component', note: 'SOH.' },
+      { equation: 'cos θ = adjacent / hypotenuse', use: 'Adjacent component', note: 'CAH.' },
+      { equation: 'tan θ = opposite / adjacent', use: 'Angle from two legs', note: 'TOA.' },
+      { equation: 'sin²θ + cos²θ = 1', use: 'Trig identity', note: 'True for every angle.' },
+      { equation: '2 sin θ cos θ = sin 2θ', use: 'Double-angle identity', note: 'May simplify projectile expressions.' },
+    ],
+  },
 ];
 
 export const formulaFinder = [
@@ -217,6 +411,16 @@ export const formulaFinder = [
     label: 'I have magnitude and direction',
     answer: 'Break the vector into Ax = A cos θ and Ay = A sin θ, assign signs from the quadrant, then calculate with components.',
   },
+  {
+    id: 'relative',
+    label: 'The observer or reference frame is changing',
+    answer: 'Use vA/C = vA/B + vB/C. Translate each slash as “relative to,” choose a positive direction, and add signed velocities.',
+  },
+  {
+    id: 'quadratic',
+    label: 'My motion equation contains time squared',
+    answer: 'Rearrange it into at² + bt + c = 0, use the quadratic formula, then keep only times that make sense for the described event.',
+  },
 ];
 
 export const lectureFlashcards = [
@@ -238,6 +442,12 @@ export const lectureFlashcards = [
   { front: 'Resultant vector from components', back: 'Add x-components together and y-components together. Then R = √(Rx² + Ry²).' },
   { front: 'Components with Ax < 0 and Ay > 0', back: 'The vector is in quadrant II, between 90° and 180° from +x.' },
   { front: 'What does concave up mean on an x–t graph?', back: 'The slope is becoming more positive, so acceleration is positive.' },
+  { front: 'What does Δ mean?', back: '“Change in.” Calculate final value minus initial value. For example, Δx = xf − xi.' },
+  { front: 'Projectile motion by axis', back: 'Horizontal: ax = 0 and vx stays constant. Vertical: ay = −g. Both directions share the same elapsed time.' },
+  { front: 'Relative velocity', back: 'vA/C = vA/B + vB/C. Read it as velocity of A relative to C equals A relative to B plus B relative to C.' },
+  { front: 'Triangle area on a v–t graph', back: 'Area = ½(base)(height). Base has seconds and height has m/s, so the area has meters of displacement.' },
+  { front: 'SOH-CAH-TOA', back: 'sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent.' },
+  { front: 'When is the quadratic formula needed?', back: 'When the unknown appears squared and the equation can be written as at² + bt + c = 0. Check which root is physically meaningful.' },
 ];
 
 export const lectureQuiz = [
@@ -312,5 +522,29 @@ export const lectureQuiz = [
     options: ['A. Acceleration', 'B. Average speed', 'C. Displacement', 'D. Final velocity'],
     answer: 'C',
     explanation: 'Each area vΔt is a displacement; adding the signed areas gives net displacement.',
+  },
+  {
+    question: 'A train moves east at 12 m/s. A passenger walks east inside it at 2 m/s relative to the train. What velocity does the ground observer measure?',
+    options: ['A. 10 m/s east', 'B. 12 m/s east', 'C. 14 m/s east', 'D. 24 m/s east'],
+    answer: 'C',
+    explanation: 'The velocities point in the same positive direction, so vperson/ground = 2 + 12 = 14 m/s east.',
+  },
+  {
+    question: 'A triangular region under a v–t graph has a 5 s base and a 4 m/s height. What displacement does its area represent?',
+    options: ['A. 9 m', 'B. 10 m', 'C. 20 m', 'D. 40 m'],
+    answer: 'B',
+    explanation: 'Triangle area is ½(base)(height) = ½(5 s)(4 m/s) = 10 m.',
+  },
+  {
+    question: 'For an angle measured above the +x-axis, which expression gives the adjacent x-component?',
+    options: ['A. A sin θ', 'B. A tan θ', 'C. A / sin θ', 'D. A cos θ'],
+    answer: 'D',
+    explanation: 'Cosine is adjacent divided by hypotenuse, so Ax = A cos θ.',
+  },
+  {
+    question: 'A quadratic solution gives t = −2 s and t = +3 s for an event that begins at t = 0. Which time normally describes the future event?',
+    options: ['A. −2 s only', 'B. +3 s only', 'C. Both times', 'D. Neither time'],
+    answer: 'B',
+    explanation: 'The positive root occurs after the chosen starting time. The negative root describes an extrapolated time before t = 0.',
   },
 ];

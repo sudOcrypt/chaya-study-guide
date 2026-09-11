@@ -1129,6 +1129,212 @@ button { color: inherit; }
   padding-left: 20px;
 }
 
+.zero-intro {
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.zero-intro > span,
+.symbol-section > div:first-child > span {
+  color: var(--lecture-blue);
+  font-family: var(--hand-font);
+  font-size: 0.7rem;
+}
+
+.zero-intro h2,
+.symbol-section h2 {
+  color: #465c68;
+  font-family: Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 4px 0 7px;
+}
+
+.zero-intro p,
+.symbol-section > div:first-child > p {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.basic-concepts {
+  display: grid;
+  gap: 11px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.basic-concepts article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px 14px 9px 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 36px 1fr;
+  padding: 18px;
+}
+
+.basic-concepts article > span {
+  font-size: 1.5rem;
+}
+
+.basic-concepts h3 {
+  color: #465a64;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.basic-concepts strong {
+  color: var(--lecture-blue-dark);
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.basic-concepts p {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.65;
+  margin-top: 8px;
+}
+
+.basic-concepts small {
+  background: var(--lecture-wash);
+  color: #5e7580;
+  display: block;
+  font-size: 0.69rem;
+  line-height: 1.55;
+  margin-top: 9px;
+  padding: 8px 9px;
+}
+
+.symbol-section {
+  background: var(--lecture-wash);
+  border: 1px dashed #9dbdcd;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 0.65fr 1.35fr;
+  margin-top: 24px;
+  padding: 22px;
+}
+
+.symbol-list {
+  background: #fff;
+  border: 1px solid #bfd0d8;
+}
+
+.symbol-row {
+  align-items: start;
+  border-top: 1px solid #d9e3e7;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 0.7fr 1.7fr 0.8fr;
+  padding: 8px 10px;
+}
+
+.symbol-row:first-child {
+  border-top: 0;
+}
+
+.symbol-row strong {
+  color: #3f6478;
+  font-family: Georgia, serif;
+  font-size: 0.75rem;
+}
+
+.symbol-row span,
+.symbol-row small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.symbol-head {
+  background: #dfeef4;
+}
+
+.symbol-head strong {
+  font-family: var(--body-font);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.universal-steps {
+  margin-top: 28px;
+}
+
+.universal-steps > div:last-child {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.universal-steps article {
+  align-items: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 11px;
+  grid-template-columns: 27px 1fr;
+  padding: 13px;
+}
+
+.universal-steps article > span {
+  align-items: center;
+  background: var(--lecture-blue);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 0.68rem;
+  height: 25px;
+  justify-content: center;
+  width: 25px;
+}
+
+.universal-steps article p {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.universal-steps article strong {
+  color: var(--lecture-blue-dark);
+  display: block;
+  font-size: 0.77rem;
+}
+
+.zero-continue {
+  background: var(--lecture-blue);
+  border: 1px solid var(--lecture-blue);
+  border-radius: 9px;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 22px auto 0;
+  padding: 10px 16px;
+}
+
+.formula-symbol-reminder {
+  background: var(--lecture-wash);
+  border-left: 4px solid var(--lecture-blue);
+  margin-top: 18px;
+  padding: 14px 17px;
+}
+
+.formula-symbol-reminder h3 {
+  color: var(--lecture-blue-dark);
+  font-family: var(--hand-font);
+  font-size: 0.84rem;
+}
+
+.formula-symbol-reminder p {
+  color: #5e727d;
+  font-size: 0.76rem;
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
 @media (max-width: 820px) {
   .header-inner { align-items: flex-start; flex-direction: column; gap: 10px; padding: 10px 16px; }
   .header-nav { justify-content: flex-start; max-width: 100%; overflow-x: auto; padding-bottom: 3px; width: 100%; }
@@ -1155,6 +1361,7 @@ button { color: inherit; }
     flex: 0 0 170px;
     grid-template-columns: 18px 22px 1fr;
   }
+  .symbol-section { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
@@ -1180,6 +1387,9 @@ button { color: inherit; }
   .lecture-hero { padding: 21px 18px; }
   .lecture-hero h1 { font-size: 2.15rem; }
   .lesson-heading h2 { font-size: 1.55rem; }
+  .basic-concepts,
+  .universal-steps > div:last-child { grid-template-columns: 1fr; }
+  .symbol-row { gap: 7px; grid-template-columns: 0.7fr 1.5fr 0.8fr; }
 }
 
 /* simplified reading mode */
@@ -1343,7 +1553,12 @@ button { color: inherit; }
 .boring-mode .formula-finder,
 .boring-mode .formula-groups > section,
 .boring-mode .formula-groups article,
-.boring-mode .formula-rules {
+.boring-mode .formula-rules,
+.boring-mode .basic-concepts article,
+.boring-mode .symbol-section,
+.boring-mode .symbol-list,
+.boring-mode .universal-steps article,
+.boring-mode .formula-symbol-reminder {
   background: #fff;
   border: 1px solid #bbb;
   border-radius: 3px;
@@ -1370,6 +1585,17 @@ button { color: inherit; }
   color: #222;
 }
 
+.boring-mode .zero-intro > span,
+.boring-mode .symbol-section > div:first-child > span,
+.boring-mode .zero-intro h2,
+.boring-mode .symbol-section h2,
+.boring-mode .basic-concepts h3,
+.boring-mode .basic-concepts strong,
+.boring-mode .universal-steps article strong,
+.boring-mode .formula-symbol-reminder h3 {
+  color: #222;
+}
+
 .boring-mode .card-btn,
 .boring-mode .section-tab,
 .boring-mode .tab,
@@ -1388,6 +1614,13 @@ button { color: inherit; }
   border-radius: 3px;
   color: #222;
   box-shadow: none;
+}
+
+.boring-mode .zero-continue {
+  background: #333;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #fff;
 }
 
 .boring-mode .section-tab.active,
@@ -1432,6 +1665,11 @@ button { color: inherit; }
 .boring-mode .study-recipe {
   background: #fff;
   border: 1px solid #bbb;
+}
+
+.boring-mode .basic-concepts small,
+.boring-mode .symbol-head {
+  background: #f1f1f1;
 }
 
 .boring-mode .study-recipe > div > span,
