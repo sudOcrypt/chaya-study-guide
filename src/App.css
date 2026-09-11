@@ -126,6 +126,32 @@ button { color: inherit; }
 .nav-pill.combined { border-color: #d9a4af; color: var(--pink-dark); }
 .nav-pill.combined.active { background: var(--pink); border-color: var(--pink); color: #fff; }
 
+.mode-toggle {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  gap: 6px;
+  padding: 6px 10px;
+}
+
+.mode-toggle:hover {
+  border-color: var(--pink);
+  color: var(--ink);
+}
+
+.mode-toggle span {
+  color: var(--pink-dark);
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+}
+
 /* layout */
 .app-main {
   margin: 0 auto;
@@ -1154,6 +1180,314 @@ button { color: inherit; }
   .lecture-hero { padding: 21px 18px; }
   .lecture-hero h1 { font-size: 2.15rem; }
   .lesson-heading h2 { font-size: 1.55rem; }
+}
+
+/* simplified reading mode */
+.boring-mode {
+  --paper: #fff;
+  --paper-deep: #f4f4f4;
+  --ink: #202020;
+  --muted: #595959;
+  --line: #c9c9c9;
+  --pink: #444;
+  --pink-dark: #222;
+  --pink-wash: #f0f0f0;
+  --green: #3f654b;
+  --green-wash: #edf3ef;
+  --yellow: #6b6250;
+  --yellow-wash: #f4f2ed;
+  --lavender: #555;
+  --shadow: none;
+  --soft-shadow: none;
+  background: #f5f5f5;
+  color: #202020;
+}
+
+.boring-mode,
+.boring-mode * {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.boring-mode *,
+.boring-mode *::before,
+.boring-mode *::after {
+  animation: none !important;
+  text-shadow: none !important;
+  transition: none !important;
+}
+
+.boring-mode .app-header {
+  background: #fff;
+  border-bottom: 1px solid #bbb;
+  backdrop-filter: none;
+}
+
+.boring-mode .header-inner {
+  max-width: 1120px;
+}
+
+.boring-mode .logo-icon,
+.boring-mode .logo-sub {
+  display: none;
+}
+
+.boring-mode .logo-btn {
+  display: block;
+}
+
+.boring-mode .logo-text {
+  color: #202020;
+  font-size: 0.95rem;
+}
+
+.boring-mode .mode-toggle {
+  background: #222;
+  border-color: #222;
+  color: #fff;
+}
+
+.boring-mode .mode-toggle span {
+  color: #fff;
+}
+
+.boring-mode .nav-pill,
+.boring-mode .nav-pill.combined,
+.boring-mode .nav-pill.lecture {
+  --accent: #444 !important;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  color: #333;
+}
+
+.boring-mode .nav-pill.active,
+.boring-mode .nav-pill.combined.active,
+.boring-mode .nav-pill.lecture.active {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.boring-mode .app-main {
+  max-width: 1000px;
+}
+
+.boring-mode .home-hero {
+  padding-top: 32px;
+}
+
+.boring-mode .eyebrow,
+.boring-mode .love-note::before,
+.boring-mode .topic-card::after,
+.boring-mode .lecture-hero::after {
+  display: none;
+}
+
+.boring-mode .home-hero h1,
+.boring-mode .home-hero h1 em,
+.boring-mode .topic-title,
+.boring-mode .topic-view-title,
+.boring-mode .lecture-hero h1,
+.boring-mode .lecture-hero h1 em,
+.boring-mode .path-intro h2,
+.boring-mode .formula-finder h2,
+.boring-mode .lesson-heading h2,
+.boring-mode .formula-groups h3 {
+  color: #202020;
+  font-style: normal;
+  letter-spacing: normal;
+}
+
+.boring-mode .home-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+}
+
+.boring-mode .home-hero h1 em {
+  font-size: inherit;
+}
+
+.boring-mode .love-note {
+  background: #fff;
+  border: 1px solid #bbb;
+  box-shadow: none;
+  max-width: 600px;
+  padding: 14px 18px;
+  transform: none;
+}
+
+.boring-mode .note-label,
+.boring-mode .love-note p {
+  color: #444;
+}
+
+.boring-mode .hero-stat,
+.boring-mode .topic-card,
+.boring-mode .accordion-item,
+.boring-mode .flashcard,
+.boring-mode .question-text,
+.boring-mode .question-image,
+.boring-mode .option,
+.boring-mode .explanation,
+.boring-mode .result-score,
+.boring-mode .result-item,
+.boring-mode .tile,
+.boring-mode .game-complete,
+.boring-mode .lecture-hero,
+.boring-mode .path-steps button,
+.boring-mode .lesson-nav,
+.boring-mode .lesson-explanation,
+.boring-mode .lesson-key-ideas,
+.boring-mode .worked-example,
+.boring-mode .common-trap,
+.boring-mode .formula-finder,
+.boring-mode .formula-groups > section,
+.boring-mode .formula-groups article,
+.boring-mode .formula-rules {
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  box-shadow: none;
+  transform: none;
+}
+
+.boring-mode .topic-card:hover,
+.boring-mode .path-steps button:hover,
+.boring-mode .tile:hover,
+.boring-mode .option:hover {
+  border-color: #555;
+  box-shadow: none;
+  transform: none;
+}
+
+.boring-mode .topic-title,
+.boring-mode .topic-view-title,
+.boring-mode .accordion-item.open .accordion-header,
+.boring-mode .lesson-heading > span,
+.boring-mode .lecture-kicker,
+.boring-mode .path-intro > span,
+.boring-mode .formula-finder > div:first-child > span {
+  color: #222;
+}
+
+.boring-mode .card-btn,
+.boring-mode .section-tab,
+.boring-mode .tab,
+.boring-mode .btn-secondary,
+.boring-mode .btn-back,
+.boring-mode .btn-flip,
+.boring-mode .btn-known,
+.boring-mode .btn-unknown,
+.boring-mode .btn-primary,
+.boring-mode .lecture-tabs button,
+.boring-mode .path-actions button,
+.boring-mode .worked-example > button,
+.boring-mode .finder-options button {
+  background: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  color: #222;
+  box-shadow: none;
+}
+
+.boring-mode .section-tab.active,
+.boring-mode .tab.active,
+.boring-mode .btn-flip,
+.boring-mode .btn-primary,
+.boring-mode .lecture-tabs button.active,
+.boring-mode .path-actions button:first-child,
+.boring-mode .worked-example > button,
+.boring-mode .finder-options button.active {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.boring-mode .topic-card,
+.boring-mode .topic-card:nth-child(odd),
+.boring-mode .topic-card:nth-child(even),
+.boring-mode .flashcard,
+.boring-mode .tile:nth-child(3n),
+.boring-mode .personal-feedback {
+  transform: none;
+}
+
+.boring-mode .lecture-learning {
+  --lecture-blue: #444;
+  --lecture-blue-dark: #222;
+  --lecture-wash: #fff;
+}
+
+.boring-mode .lecture-hero {
+  display: block;
+  padding: 24px;
+}
+
+.boring-mode .lecture-source-list {
+  border: 1px solid #bbb;
+  margin-top: 18px;
+  transform: none;
+}
+
+.boring-mode .study-recipe {
+  background: #fff;
+  border: 1px solid #bbb;
+}
+
+.boring-mode .study-recipe > div > span,
+.boring-mode .path-actions button:first-child {
+  background: #333;
+}
+
+.boring-mode .lesson-heading {
+  border-bottom-color: #555;
+}
+
+.boring-mode .lesson-nav button.active,
+.boring-mode .example-answer,
+.boring-mode .finder-result {
+  background: #f1f1f1;
+  border-color: #777;
+  color: #222;
+}
+
+.boring-mode .formula-groups > section {
+  border-top: 3px solid #555;
+}
+
+.boring-mode .formula-groups h3,
+.boring-mode .formula-groups article p,
+.boring-mode .finder-result span {
+  color: #333;
+}
+
+.boring-mode .progress-bar-fill,
+.boring-mode .quiz-progress-fill {
+  background: #444;
+}
+
+.boring-mode .option.selected {
+  background: #ededed;
+  border-color: #666;
+}
+
+.boring-mode .option.correct,
+.boring-mode .personal-feedback.correct {
+  background: #edf3ef;
+  border-color: #557662;
+  color: #294d35;
+}
+
+.boring-mode .option.wrong,
+.boring-mode .personal-feedback.incorrect {
+  background: #f6eeee;
+  border-color: #8c6060;
+  color: #653333;
+}
+
+.boring-mode .app-footer {
+  background: #fff;
+  border-top: 1px solid #bbb;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { topics, combinedFlashcards, combinedQuiz } from './data/studyData';
 import FlashcardDeck from './components/FlashcardDeck';
 import Quiz from './components/Quiz';
@@ -12,16 +12,32 @@ const SECTION_LABELS = { notes: 'Study Notes', flashcards: 'Flashcards', quiz: '
 export default function App() {
   const [view, setView] = useState('home'); // 'home' | topicId | 'combined'
   const [section, setSection] = useState('notes');
+  const [boringMode, setBoringMode] = useState(
+    () => typeof window !== 'undefined' && window.localStorage.getItem('chaya-boring-mode') === 'true',
+  );
   const activeTopic = topics.find(t => t.id === view);
 
+  useEffect(() => {
+    window.localStorage.setItem('chaya-boring-mode', String(boringMode));
+  }, [boringMode]);
+
   return (
-    <div className="app">
+    <div className={`app ${boringMode ? 'boring-mode' : ''}`}>
       <header className="app-header">
         <div className="header-inner">
           <button className="logo-btn" onClick={() => setView('home')}>
             <span className="logo-icon">💗</span>
             <span className="logo-text">chaya's physics corner</span>
             <span className="logo-sub">made with love (and a little panic)</span>
+          </button>
+          <button
+            className="mode-toggle"
+            onClick={() => setBoringMode((enabled) => !enabled)}
+            aria-pressed={boringMode}
+            title="Switch between the decorative and simplified reading modes"
+          >
+            <span aria-hidden="true">{boringMode ? '♡' : 'Aa'}</span>
+            {boringMode ? 'Pretty mode' : 'Boring mode'}
           </button>
           <nav className="header-nav">
             {topics.map(t => (
