@@ -3,6 +3,7 @@ import { topics, combinedFlashcards, combinedQuiz } from './data/studyData';
 import FlashcardDeck from './components/FlashcardDeck';
 import Quiz from './components/Quiz';
 import MatchingGame from './components/MatchingGame';
+import LectureLearning from './components/LectureLearning';
 import './App.css';
 
 const SECTIONS = ['notes', 'flashcards', 'quiz', 'matching'];
@@ -39,6 +40,12 @@ export default function App() {
             >
               Practice Exam
             </button>
+            <button
+              className={`nav-pill lecture ${view === 'lecture-learning' ? 'active' : ''}`}
+              onClick={() => setView('lecture-learning')}
+            >
+              Lecture Learning
+            </button>
           </nav>
         </div>
       </header>
@@ -55,6 +62,7 @@ export default function App() {
         {view === 'combined' && (
           <CombinedView section={section} setSection={setSection} />
         )}
+        {view === 'lecture-learning' && <LectureLearning />}
       </main>
 
       <footer className="app-footer">
