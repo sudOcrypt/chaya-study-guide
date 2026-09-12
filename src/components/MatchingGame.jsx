@@ -102,14 +102,17 @@ export default function MatchingGame({ cards, title }) {
       ) : (
         <div className="tiles-grid">
           {items.map(item => (
-            <div
+            <button
+              type="button"
               key={item.id}
               className={tileClass(item)}
               onClick={() => handleClick(item)}
+              aria-pressed={selected?.id === item.id}
+              disabled={matched.has(item.pairId)}
             >
               <span className="tile-type">{item.type === 'q' ? 'TERM' : 'ANSWER'}</span>
               <span className="tile-text">{item.text}</span>
-            </div>
+            </button>
           ))}
         </div>
       )}
