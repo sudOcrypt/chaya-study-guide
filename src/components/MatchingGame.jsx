@@ -20,6 +20,7 @@ export default function MatchingGame({ cards, title }) {
   const [startTime, setStartTime] = useState(null);
   const [elapsed, setElapsed] = useState(0);
   const [done, setDone] = useState(false);
+  const [helpMessage, setHelpMessage] = useState('');
 
   const initGame = () => {
     setItems(createItems(gameCards));
@@ -30,6 +31,7 @@ export default function MatchingGame({ cards, title }) {
     setStartTime(Date.now());
     setElapsed(0);
     setDone(false);
+    setHelpMessage('');
   };
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function MatchingGame({ cards, title }) {
 
     if (!selected) {
       setSelected(item);
+      setHelpMessage('');
       return;
     }
 
@@ -56,11 +59,22 @@ export default function MatchingGame({ cards, title }) {
       setMatched(newMatched);
       setSelected(null);
       setWrong(null);
+      setHelpMessage('Yes. Those two say the same idea in question-and-answer form.');
       if (newMatched.size === gameCards.length) {
         setDone(true);
       }
     } else {
       setWrong(item.id);
+      const selectedMatch = items.find(
+        (candidate) => candidate.pairId === selected.pairId && candidate.id !== selected.id,
+      );
+      const clickedMatch = items.find(
+        (candidate) => candidate.pairId === item.pairId && candidate.id !== item.id,
+      );
+      setHelpMessage(
+        `These do not match. “${selected.text}” belongs with “${selectedMatch?.text}.” `
+        + `The card you tapped—“${item.text}”—belongs with “${clickedMatch?.text}.”`,
+      );
       setTimeout(() => {
         setWrong(null);
         setSelected(null);
@@ -76,6 +90,17 @@ export default function MatchingGame({ cards, title }) {
   };
 
   const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
+
+  const showHint = () => {
+    if (!selected) {
+      setHelpMessage('Tap one unmatched card first. Then Hint can show the exact card that explains it.');
+      return;
+    }
+    const match = items.find(
+      (candidate) => candidate.pairId === selected.pairId && candidate.id !== selected.id,
+    );
+    setHelpMessage(`Look for this matching idea: “${match?.text}”`);
+  };
 
   return (
     <div className="matching-game">
@@ -100,21 +125,27 @@ export default function MatchingGame({ cards, title }) {
           <button className="btn-primary" onClick={initGame}>Play Again</button>
         </div>
       ) : (
-        <div className="tiles-grid">
-          {items.map(item => (
-            <button
-              type="button"
-              key={item.id}
-              className={tileClass(item)}
-              onClick={() => handleClick(item)}
-              aria-pressed={selected?.id === item.id}
-              disabled={matched.has(item.pairId)}
-            >
-              <span className="tile-type">{item.type === 'q' ? 'TERM' : 'ANSWER'}</span>
-              <span className="tile-text">{item.text}</span>
-            </button>
-          ))}
-        </div>
+        <>
+          <div className="game-help">
+            <button className="btn-hint" onClick={showHint}>Need a matching hint?</button>
+            {helpMessage && <p aria-live="polite">{helpMessage}</p>}
+          </div>
+          <div className="tiles-grid">
+            {items.map(item => (
+              <button
+                type="button"
+                key={item.id}
+                className={tileClass(item)}
+                onClick={() => handleClick(item)}
+                aria-pressed={selected?.id === item.id}
+                disabled={matched.has(item.pairId)}
+              >
+                <span className="tile-type">{item.type === 'q' ? 'TERM' : 'ANSWER'}</span>
+                <span className="tile-text">{item.text}</span>
+              </button>
+            ))}
+          </div>
+        </>
       )}
 
       {!done && (

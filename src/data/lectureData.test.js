@@ -8,6 +8,8 @@ import {
   lectureQuiz,
 } from './lectureData.js';
 import { lectureExamples } from './lectureExamples.js';
+import { fullExamQuiz } from './studyData.js';
+import { getQuizTeaching } from './quizTeaching.js';
 import { getOptionLetter, isAnswerCorrect } from '../utils/quizScoring.js';
 
 test('includes all lecture sources and a guided example for every lesson', () => {
@@ -60,5 +62,20 @@ test('every lecture-slide question has a complete narrated walkthrough', () => {
     assert.ok(example.steps.every((step) => step.title && step.body));
     assert.ok(example.answer);
     assert.ok(example.check);
+  });
+});
+
+test('every exam and practice question has a hint and start-from-zero correction', () => {
+  const allQuestions = [...fullExamQuiz, ...lectureQuiz];
+  assert.equal(allQuestions.length, 36);
+
+  allQuestions.forEach((question) => {
+    const teaching = getQuizTeaching(question);
+    assert.ok(teaching.hint);
+    assert.ok(teaching.ask);
+    assert.ok(teaching.rule);
+    assert.ok(teaching.steps.length >= 3);
+    assert.ok(teaching.steps.every((step) => step.length >= 12));
+    assert.ok(teaching.why);
   });
 });

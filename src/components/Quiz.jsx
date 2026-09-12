@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { pickEncouragement } from '../data/encouragements';
+import { getQuizTeaching } from '../data/quizTeaching';
 import { calculateScore, getOptionLetter, isAnswerCorrect } from '../utils/quizScoring';
 
 export default function Quiz({ questions, title }) {
@@ -11,6 +12,7 @@ export default function Quiz({ questions, title }) {
   const [review, setReview] = useState(false);
   const [reviewIndex, setReviewIndex] = useState(0);
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [showHint, setShowHint] = useState(false);
 
   const q = questions[current];
   const totalQ = questions.length;
@@ -36,6 +38,7 @@ export default function Quiz({ questions, title }) {
       setSelected(null);
       setSubmitted(false);
       setFeedbackMessage('');
+      setShowHint(false);
     }
   };
 
@@ -48,6 +51,7 @@ export default function Quiz({ questions, title }) {
     setReview(false);
     setReviewIndex(0);
     setFeedbackMessage('');
+    setShowHint(false);
   };
 
   const isCorrect = isAnswerCorrect(selected, q.answer);
@@ -90,6 +94,7 @@ export default function Quiz({ questions, title }) {
   if (review) {
     const rq = questions[reviewIndex];
     const userLetter = answers[reviewIndex];
+    const reviewCorrect = isAnswerCorrect(userLetter, rq.answer);
     return (
       <div className="quiz-review">
         <div className="review-header">
@@ -113,9 +118,13 @@ export default function Quiz({ questions, title }) {
             );
           })}
         </div>
-        <div className="explanation">
-          <strong>Explanation:</strong> {rq.explanation}
-        </div>
+        {reviewCorrect ? (
+          <div className="explanation">
+            <strong>Explanation:</strong> {rq.explanation}
+          </div>
+        ) : (
+          <WrongAnswerLesson question={rq} selectedLetter={userLetter} />
+        )}
         <div className="review-nav">
           <button className="btn-secondary" onClick={() => setReviewIndex(i => Math.max(0, i - 1))} disabled={reviewIndex === 0}>← Prev</button>
           <button className="btn-secondary" onClick={() => setReviewIndex(i => Math.min(totalQ - 1, i + 1))} disabled={reviewIndex === totalQ - 1}>Next →</button>
@@ -154,26 +163,112 @@ export default function Quiz({ questions, title }) {
       </div>
 
       {submitted && (
-        <div className="explanation">
-          <strong>{isCorrect ? '✓ Correct!' : `✗ Incorrect. The correct answer is ${q.answer}.`}</strong>
-          <div className={`personal-feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
-            {feedbackMessage}
+        <>
+          <div className="answer-feedback">
+            <strong>{isCorrect ? '✓ Correct!' : `✗ Not this one. The correct answer is ${q.answer}.`}</strong>
+            <div className={`personal-feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+              {feedbackMessage}
+            </div>
           </div>
-          <br />{q.explanation}
-        </div>
+          {isCorrect ? (
+            <div className="explanation">
+              <strong>Why:</strong> {q.explanation}
+            </div>
+          ) : (
+            <WrongAnswerLesson question={q} selectedLetter={selected} />
+          )}
+        </>
       )}
 
       <div className="quiz-actions">
         {!submitted ? (
-          <button className="btn-primary" onClick={handleSubmit} disabled={!selected}>
-            Submit Answer
-          </button>
+          <>
+            <button
+              className="btn-hint"
+              onClick={() => setShowHint((visible) => !visible)}
+              aria-expanded={showHint}
+              aria-controls="question-hint"
+            >
+              {showHint ? 'Hide hint' : 'Need a hint?'}
+            </button>
+            <button className="btn-primary" onClick={handleSubmit} disabled={!selected}>
+              Submit Answer
+            </button>
+          </>
         ) : (
           <button className="btn-primary" onClick={handleNext}>
             {current + 1 >= totalQ ? 'See Results' : 'Next Question →'}
           </button>
         )}
       </div>
+      {!submitted && showHint && (
+        <div className="question-hint" id="question-hint">
+          <span>gentle hint</span>
+          <p>{getQuizTeaching(q).hint}</p>
+        </div>
+      )}
     </div>
+  );
+}
+
+function WrongAnswerLesson({ question, selectedLetter }) {
+  const teaching = getQuizTeaching(question);
+  const selectedOption = question.options.find(
+    (option) => getOptionLetter(option) === selectedLetter,
+  );
+  const correctOption = question.options.find(
+    (option) => getOptionLetter(option) === question.answer,
+  );
+
+  return (
+    <section className="wrong-answer-lesson">
+      <header>
+        <span>start-from-zero correction</span>
+        <h4>Let’s slow it all the way down.</h4>
+        <p>
+          Getting this wrong only tells us exactly which idea to rebuild. Follow
+          these small steps in order.
+        </p>
+      </header>
+
+      <div className="answer-comparison">
+        <div>
+          <span>You chose</span>
+          <strong>{selectedOption ?? `${selectedLetter}. No answer recorded`}</strong>
+        </div>
+        <div>
+          <span>The correct choice</span>
+          <strong>{correctOption}</strong>
+        </div>
+      </div>
+
+      <div className="wrong-foundation">
+        <article>
+          <span>1</span>
+          <div><h5>What is the question asking?</h5><p>{teaching.ask}</p></div>
+        </article>
+        <article>
+          <span>2</span>
+          <div><h5>What rule or equation do we need?</h5><code>{teaching.rule}</code></div>
+        </article>
+      </div>
+
+      <div className="wrong-steps">
+        <h5>Now do one tiny step at a time</h5>
+        <ol>
+          {teaching.steps.map((step, index) => (
+            <li key={step}>
+              <span>{index + 1}</span>
+              <p>{step}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div className="why-wrong">
+        <span>Why the wrong choice does not work</span>
+        <p>{teaching.why}</p>
+      </div>
+    </section>
   );
 }
