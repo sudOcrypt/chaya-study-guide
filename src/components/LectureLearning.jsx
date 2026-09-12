@@ -10,6 +10,7 @@ import {
   universalProblemSteps,
 } from '../data/lectureData';
 import { lectureExamples } from '../data/lectureExamples';
+import { explainOneStep } from '../utils/stepExplanation';
 import FlashcardDeck from './FlashcardDeck';
 import Quiz from './Quiz';
 
@@ -274,6 +275,7 @@ function GuidedLessons() {
 
 function WorkedExamples() {
   const [activeId, setActiveId] = useState(lectureExamples[0].id);
+  const [openStep, setOpenStep] = useState(null);
   const activeIndex = lectureExamples.findIndex((example) => example.id === activeId);
   const example = lectureExamples[activeIndex];
 
@@ -283,6 +285,7 @@ function WorkedExamples() {
       Math.max(0, activeIndex + direction),
     );
     setActiveId(lectureExamples[nextIndex].id);
+    setOpenStep(null);
   };
 
   return (
@@ -296,7 +299,10 @@ function WorkedExamples() {
           <button
             key={item.id}
             className={item.id === activeId ? 'active' : ''}
-            onClick={() => setActiveId(item.id)}
+            onClick={() => {
+              setActiveId(item.id);
+              setOpenStep(null);
+            }}
           >
             <small>{String(index + 1).padStart(2, '0')}</small>
             <span><b>{item.title}</b>{item.source}</span>
@@ -357,6 +363,19 @@ function WorkedExamples() {
                   <h4>{step.title}</h4>
                   {step.math && <code>{step.math}</code>}
                   <p>{step.body}</p>
+                  <button
+                    className="step-help-toggle"
+                    onClick={() => setOpenStep(openStep === index ? null : index)}
+                    aria-expanded={openStep === index}
+                  >
+                    {openStep === index ? 'Hide smaller explanation' : 'I don’t understand this step'}
+                  </button>
+                  {openStep === index && (
+                    <div className="step-help-detail">
+                      {explainOneStep(`${step.math ? `${step.math}. ` : ''}${step.body}`)
+                        .map((line) => <p key={line}>{line}</p>)}
+                    </div>
+                  )}
                 </div>
               </li>
             ))}

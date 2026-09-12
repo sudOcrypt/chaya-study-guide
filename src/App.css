@@ -324,6 +324,8 @@ svg {
 .card-btn.match { background: var(--yellow-wash); border-color: #ead59c; color: #8b6929; }
 .combined-card { background: #fff6f7; border: 1px dashed #dfa4b3; }
 .combined-card .topic-title { color: var(--pink-dark); }
+.coach-card { background: #f2f8f3; border: 1px dashed #9fc0a9; }
+.coach-card .topic-title { color: #467258; }
 
 /* topic pages */
 .topic-header {
@@ -708,6 +710,33 @@ svg {
   background: var(--lecture-blue, #6f9c7d);
 }
 
+.step-help-toggle {
+  background: transparent;
+  border: 0;
+  color: #54788b;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  margin-top: 6px;
+  padding: 3px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.step-help-detail {
+  background: #edf6fa;
+  border-left: 3px solid var(--lecture-blue, #4f88a8);
+  display: grid;
+  gap: 5px;
+  margin-top: 7px;
+  padding: 10px 11px;
+}
+
+.step-help-detail p {
+  color: #526c79;
+  font-size: 0.7rem;
+}
+
 .why-wrong {
   background: #f8ecec;
   border-left: 4px solid var(--red);
@@ -720,6 +749,60 @@ svg {
 
 .why-wrong p {
   color: #775155;
+}
+
+.confidence-check {
+  align-items: center;
+  background: #f4f1f8;
+  border: 1px solid #d2c8e0;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr auto;
+  margin: 0 0 18px;
+  padding: 13px 15px;
+}
+
+.confidence-check span {
+  color: var(--lavender);
+  font-family: var(--hand-font);
+  font-size: 0.63rem;
+}
+
+.confidence-check h4 {
+  color: #5f566d;
+  font-family: Georgia, serif;
+  font-size: 0.86rem;
+}
+
+.confidence-check p {
+  color: var(--muted);
+  font-size: 0.67rem;
+  line-height: 1.45;
+}
+
+.confidence-check > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end;
+}
+
+.confidence-check button {
+  background: #fff;
+  border: 1px solid #c7bbd8;
+  border-radius: 999px;
+  color: #6e6380;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  min-height: 36px;
+  padding: 6px 10px;
+}
+
+.confidence-check button.active {
+  background: var(--lavender);
+  border-color: var(--lavender);
+  color: #fff;
 }
 
 /* results and review */
@@ -1941,6 +2024,532 @@ svg {
   font-size: 0.67rem;
 }
 
+/* adaptive learning coach */
+.nav-pill.coach {
+  background: #edf5ef;
+  border-color: #a9cab3;
+  color: #3f7350;
+}
+
+.nav-pill.coach.active {
+  background: #568367;
+  border-color: #568367;
+  color: #fff;
+}
+
+.learning-coach {
+  --coach: #568367;
+  --coach-dark: #365c44;
+  --coach-wash: #edf5ef;
+  padding-top: 10px;
+}
+
+.coach-hero {
+  align-items: center;
+  background: linear-gradient(135deg, #edf6ef, #fffaf2 65%);
+  border: 1px solid #b9d1c0;
+  border-radius: 9px 18px 10px 15px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1.4fr 0.6fr;
+  margin-bottom: 18px;
+  padding: 30px;
+}
+
+.coach-hero > div:first-child > span,
+.coach-section-heading > span,
+.daily-session > header > span,
+.model-example > span,
+.revisit-card > span {
+  color: var(--coach);
+  font-family: var(--hand-font);
+  font-size: 0.7rem;
+}
+
+.coach-hero h1 {
+  color: #3d5c49;
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin: 5px 0 10px;
+}
+
+.coach-hero p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+.coach-hero-stats {
+  display: grid;
+  gap: 9px;
+}
+
+.coach-hero-stats div {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px dashed #aac8b3;
+  padding: 12px;
+  text-align: center;
+}
+
+.coach-hero-stats strong {
+  color: var(--coach-dark);
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 1.55rem;
+}
+
+.coach-hero-stats span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.65rem;
+}
+
+.coach-tabs {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 22px;
+  overflow-x: auto;
+  padding: 3px 2px 5px;
+}
+
+.coach-tabs button {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 7px 13px;
+}
+
+.coach-tabs button.active {
+  background: var(--coach);
+  border-color: var(--coach);
+  color: #fff;
+}
+
+.coach-section-heading,
+.daily-session > header {
+  margin-bottom: 20px;
+  max-width: 760px;
+}
+
+.coach-section-heading h2,
+.daily-session > header h2 {
+  color: #455c4d;
+  font-family: Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 4px 0 6px;
+}
+
+.coach-section-heading p,
+.daily-session > header p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.daily-plan {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.daily-plan article {
+  align-items: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 29px 1fr;
+  padding: 13px;
+}
+
+.daily-plan article > span {
+  align-items: center;
+  background: var(--coach);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 0.66rem;
+  height: 27px;
+  justify-content: center;
+  width: 27px;
+}
+
+.daily-plan small {
+  color: var(--coach);
+  display: block;
+  font-family: var(--hand-font);
+  font-size: 0.61rem;
+  margin-bottom: 2px;
+}
+
+.daily-plan p {
+  color: #5f6862;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.coach-primary,
+.coach-secondary,
+.coach-back,
+.mastered-toggle {
+  background: var(--coach);
+  border: 1px solid var(--coach);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 9px 14px;
+}
+
+.daily-session > .coach-primary,
+.daily-session > .coach-secondary {
+  margin-top: 16px;
+}
+
+.coach-secondary,
+.coach-back,
+.mastered-toggle {
+  background: var(--paper);
+  color: var(--coach-dark);
+}
+
+.coach-back {
+  margin-bottom: 18px;
+}
+
+.coach-note {
+  background: #fff6d9;
+  border-left: 3px solid var(--yellow);
+  color: #796638;
+  font-size: 0.7rem;
+  line-height: 1.55;
+  margin-top: 15px;
+  padding: 10px 12px;
+}
+
+.concept-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 17px;
+}
+
+.concept-picker button {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 7px 10px;
+}
+
+.concept-picker button.active {
+  background: var(--coach-wash);
+  border-color: var(--coach);
+  color: var(--coach-dark);
+}
+
+.ladder-track {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 18px;
+}
+
+.ladder-track > div {
+  align-items: center;
+  border-bottom: 3px solid #d8ddd9;
+  display: flex;
+  gap: 7px;
+  padding: 8px 4px;
+}
+
+.ladder-track > div.active {
+  border-color: var(--coach);
+}
+
+.ladder-track span {
+  align-items: center;
+  background: #d8ddd9;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 0.63rem;
+  height: 23px;
+  justify-content: center;
+  width: 23px;
+}
+
+.ladder-track > div.active span {
+  background: var(--coach);
+}
+
+.ladder-track p {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.model-example,
+.revisit-card {
+  background: var(--paper);
+  border: 1px solid #b8d1bf;
+  box-shadow: 2px 3px 0 rgba(86, 131, 103, 0.1);
+  padding: 20px;
+}
+
+.model-example h3,
+.revisit-card h3 {
+  color: #405a49;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 5px 0 11px;
+}
+
+.model-rule,
+.mastery-rule {
+  background: var(--coach-wash);
+  border-left: 3px solid var(--coach);
+  color: #4d6856;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  padding: 10px 12px;
+}
+
+.model-example ol {
+  color: var(--muted);
+  display: grid;
+  font-size: 0.75rem;
+  gap: 6px;
+  line-height: 1.6;
+  margin: 13px 0 13px 20px;
+}
+
+.model-example > p,
+.revisit-card > p {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.65;
+  margin-bottom: 13px;
+}
+
+.ladder-instruction,
+.mastery-rule {
+  margin-bottom: 18px;
+}
+
+.ladder-instruction {
+  background: #fff6d9;
+  border-left: 3px solid var(--yellow);
+  color: #76643c;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: 11px 13px;
+}
+
+.ladder-instruction strong {
+  display: block;
+}
+
+.mastered-toggle {
+  margin: -5px 0 15px;
+}
+
+.empty-notebook {
+  background: var(--coach-wash);
+  border: 1px dashed #aac7b2;
+  color: var(--coach-dark);
+  padding: 24px;
+  text-align: center;
+}
+
+.empty-notebook p {
+  color: var(--muted);
+  font-size: 0.74rem;
+  margin-top: 3px;
+}
+
+.mistake-list {
+  display: grid;
+  gap: 12px;
+}
+
+.mistake-list > article {
+  background: var(--paper);
+  border: 1px solid #deb5b8;
+  border-left: 4px solid var(--red);
+  padding: 17px;
+}
+
+.mistake-list > article.mastered {
+  border-color: #b7d1be;
+  border-left-color: var(--coach);
+  opacity: 0.8;
+}
+
+.mistake-status {
+  align-items: center;
+  display: flex;
+  gap: 9px;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.mistake-status span {
+  background: #f8e3e4;
+  border-radius: 999px;
+  color: #9a4851;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 3px 8px;
+}
+
+.mastered .mistake-status span {
+  background: var(--coach-wash);
+  color: var(--coach-dark);
+}
+
+.mistake-status small {
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+.mistake-list h3 {
+  color: #5e5053;
+  font-family: Georgia, serif;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.mistake-answers {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 9px;
+}
+
+.mistake-answers p,
+.mistake-rule,
+.mistake-why {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.mistake-answers p {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 8px;
+}
+
+.mistake-rule {
+  background: #fff6d9;
+  padding: 9px 10px;
+}
+
+.mistake-why {
+  margin: 9px 0 12px;
+}
+
+.progress-summary {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.progress-summary article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 13px 8px;
+  text-align: center;
+}
+
+.progress-summary strong {
+  color: var(--coach-dark);
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.progress-summary span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.61rem;
+  line-height: 1.3;
+}
+
+.concept-progress {
+  display: grid;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.concept-progress > p {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.concept-progress article {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 11px 13px;
+}
+
+.concept-progress article > div:first-child {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.concept-progress strong {
+  color: #4b6051;
+  font-size: 0.75rem;
+}
+
+.concept-progress article > div:first-child span {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
+.concept-meter {
+  background: #e6e1d9;
+  height: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.concept-meter span {
+  background: var(--coach);
+  display: block;
+  height: 100%;
+}
+
+.reset-learning {
+  background: transparent;
+  border: 0;
+  color: var(--red);
+  cursor: pointer;
+  font-size: 0.67rem;
+  margin-top: 22px;
+  text-decoration: underline;
+}
+
 @media (max-width: 820px) {
   .header-inner {
     align-items: center;
@@ -2059,6 +2668,16 @@ svg {
   .formula-groups article strong,
   .result-text,
   .topic-view-title { overflow-wrap: anywhere; }
+  .coach-hero { grid-template-columns: 1fr; }
+  .coach-hero-stats { grid-template-columns: 1fr 1fr; }
+  .coach-tabs {
+    margin-inline: -16px;
+    overscroll-behavior-x: contain;
+    padding-inline: 16px;
+    scroll-snap-type: x proximity;
+  }
+  .coach-tabs button { min-height: 44px; scroll-snap-align: start; }
+  .progress-summary { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 520px) {
@@ -2104,7 +2723,8 @@ svg {
   .topic-view-title { font-size: 1.5rem; line-height: 1.2; }
   .topic-view-meta { font-size: 0.72rem; line-height: 1.5; }
   .section-tabs,
-  .lecture-tabs {
+  .lecture-tabs,
+  .coach-tabs {
     margin-inline: -12px;
     padding-inline: 12px;
   }
@@ -2156,6 +2776,13 @@ svg {
   .wrong-foundation article,
   .wrong-steps li { gap: 8px; grid-template-columns: 26px 1fr; }
   .wrong-steps { padding: 12px 10px; }
+  .step-help-toggle { min-height: 40px; text-align: left; }
+  .confidence-check { align-items: stretch; grid-template-columns: 1fr; }
+  .confidence-check > div:last-child {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .confidence-check button { min-height: 44px; padding-inline: 5px; }
   .result-score { gap: 14px; padding: 17px; }
   .grade { font-size: 2.45rem; }
   .score-text { font-size: 0.9rem; }
@@ -2230,6 +2857,36 @@ svg {
   .formula-groups article { padding: 10px; }
   .formula-groups article strong { font-size: 0.9rem; overflow-wrap: anywhere; }
   .formula-rules { padding: 15px; }
+  .learning-coach { padding-top: 0; }
+  .coach-hero { gap: 17px; padding: 20px 16px; }
+  .coach-hero h1 { font-size: clamp(1.9rem, 10vw, 2.3rem); }
+  .coach-hero-stats { gap: 7px; }
+  .daily-plan { grid-template-columns: 1fr; }
+  .coach-primary,
+  .coach-secondary,
+  .mastered-toggle { min-height: 44px; }
+  .daily-session > .coach-primary,
+  .daily-session > .coach-secondary { width: 100%; }
+  .concept-picker {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .concept-picker button { flex: 0 0 auto; min-height: 44px; }
+  .ladder-track { grid-template-columns: repeat(2, 1fr); }
+  .model-example,
+  .revisit-card { padding: 16px 13px; }
+  .model-example .coach-primary,
+  .revisit-card .coach-secondary { width: 100%; }
+  .mistake-answers { grid-template-columns: 1fr; }
+  .mistake-list > article { padding: 14px 12px; }
+  .mistake-list .coach-primary { width: 100%; }
+  .progress-summary { grid-template-columns: repeat(2, 1fr); }
+  .concept-progress article > div:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
   .app-footer {
     padding-bottom: calc(18px + env(safe-area-inset-bottom));
     padding-inline: 12px;
@@ -2450,7 +3107,9 @@ svg {
 .boring-mode .answer-comparison > div,
 .boring-mode .wrong-foundation article,
 .boring-mode .wrong-steps,
-.boring-mode .why-wrong {
+.boring-mode .why-wrong,
+.boring-mode .confidence-check,
+.boring-mode .step-help-detail {
   background: #fff;
   border: 1px solid #bbb;
   border-radius: 3px;
@@ -2497,7 +3156,11 @@ svg {
 .boring-mode .question-hint span,
 .boring-mode .question-hint p,
 .boring-mode .why-wrong > span,
-.boring-mode .why-wrong p {
+.boring-mode .why-wrong p,
+.boring-mode .confidence-check span,
+.boring-mode .confidence-check h4,
+.boring-mode .step-help-detail p,
+.boring-mode .step-help-toggle {
   color: #222;
 }
 
@@ -2526,12 +3189,19 @@ svg {
 .boring-mode .path-actions button,
 .boring-mode .worked-example > button,
 .boring-mode .finder-options button,
-.boring-mode .btn-hint {
+.boring-mode .btn-hint,
+.boring-mode .confidence-check button {
   background: #fff;
   border: 1px solid #999;
   border-radius: 3px;
   color: #222;
   box-shadow: none;
+}
+
+.boring-mode .confidence-check button.active {
+  background: #333;
+  border-color: #333;
+  color: #fff;
 }
 
 .boring-mode .wrong-foundation code {
@@ -2662,6 +3332,59 @@ svg {
 .boring-mode .app-footer {
   background: #fff;
   border-top: 1px solid #bbb;
+}
+
+.boring-mode .learning-coach {
+  --coach: #444;
+  --coach-dark: #222;
+  --coach-wash: #f1f1f1;
+}
+
+.boring-mode .coach-hero,
+.boring-mode .coach-hero-stats div,
+.boring-mode .daily-plan article,
+.boring-mode .model-example,
+.boring-mode .revisit-card,
+.boring-mode .mistake-list > article,
+.boring-mode .progress-summary article,
+.boring-mode .concept-progress article,
+.boring-mode .empty-notebook {
+  background: #fff;
+  border-color: #bbb;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.boring-mode .coach-hero h1,
+.boring-mode .coach-section-heading h2,
+.boring-mode .daily-session > header h2,
+.boring-mode .model-example h3,
+.boring-mode .revisit-card h3,
+.boring-mode .mistake-list h3,
+.boring-mode .coach-hero > div:first-child > span,
+.boring-mode .coach-section-heading > span,
+.boring-mode .daily-session > header > span {
+  color: #222;
+}
+
+.boring-mode .coach-tabs button,
+.boring-mode .concept-picker button,
+.boring-mode .coach-primary,
+.boring-mode .coach-secondary,
+.boring-mode .coach-back,
+.boring-mode .mastered-toggle {
+  background: #fff;
+  border: 1px solid #777;
+  border-radius: 3px;
+  color: #222;
+}
+
+.boring-mode .coach-tabs button.active,
+.boring-mode .concept-picker button.active,
+.boring-mode .coach-primary {
+  background: #333;
+  border-color: #333;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {

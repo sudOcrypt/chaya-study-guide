@@ -257,6 +257,7 @@ const lectureTeaching = {
 };
 
 export function getQuizTeaching(question) {
+  if (question.teaching) return question.teaching;
   if (question.number && examTeaching[question.number]) return examTeaching[question.number];
   if (lectureTeaching[question.question]) return lectureTeaching[question.question];
 

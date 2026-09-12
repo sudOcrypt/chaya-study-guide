@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { pickEncouragement } from '../data/encouragements';
 import { getQuizTeaching } from '../data/quizTeaching';
+import { useLearningProgress } from '../context/learningProgressStore';
+import { getQuestionKey } from '../utils/learningProgress';
+import { explainOneStep } from '../utils/stepExplanation';
 import { calculateScore, getOptionLetter, isAnswerCorrect } from '../utils/quizScoring';
 
-export default function Quiz({ questions, title }) {
+export default function Quiz({ questions, title, hintsEnabled = true, onComplete }) {
+  const { progress, recordAttempt, recordConfidence } = useLearningProgress();
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState(null); // always stores just the letter: "A","B","C","D"
   const [submitted, setSubmitted] = useState(false);
@@ -13,6 +17,7 @@ export default function Quiz({ questions, title }) {
   const [reviewIndex, setReviewIndex] = useState(0);
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [showHint, setShowHint] = useState(false);
+  const [confidence, setConfidence] = useState(null);
 
   const q = questions[current];
   const totalQ = questions.length;
@@ -25,20 +30,24 @@ export default function Quiz({ questions, title }) {
 
   const handleSubmit = () => {
     if (!selected) return;
-    setFeedbackMessage(pickEncouragement(isAnswerCorrect(selected, q.answer)));
+    const correct = isAnswerCorrect(selected, q.answer);
+    setFeedbackMessage(pickEncouragement(correct));
     setSubmitted(true);
     setAnswers(prev => ({ ...prev, [current]: selected }));
+    recordAttempt(q, selected, correct);
   };
 
   const handleNext = () => {
     if (current + 1 >= totalQ) {
       setShowResults(true);
+      onComplete?.({ score, total: totalQ });
     } else {
       setCurrent(c => c + 1);
       setSelected(null);
       setSubmitted(false);
       setFeedbackMessage('');
       setShowHint(false);
+      setConfidence(null);
     }
   };
 
@@ -52,9 +61,16 @@ export default function Quiz({ questions, title }) {
     setReviewIndex(0);
     setFeedbackMessage('');
     setShowHint(false);
+    setConfidence(null);
   };
 
   const isCorrect = isAnswerCorrect(selected, q.answer);
+  const savedConfidence = progress.confidence[getQuestionKey(q)]?.level;
+
+  const chooseConfidence = (level) => {
+    setConfidence(level);
+    recordConfidence(q, level);
+  };
 
   const optionClass = (opt) => {
     const letter = getOptionLetter(opt);
@@ -177,20 +193,26 @@ export default function Quiz({ questions, title }) {
           ) : (
             <WrongAnswerLesson question={q} selectedLetter={selected} />
           )}
+          <ConfidenceCheck
+            value={confidence ?? savedConfidence}
+            onChange={chooseConfidence}
+          />
         </>
       )}
 
       <div className="quiz-actions">
         {!submitted ? (
           <>
-            <button
-              className="btn-hint"
-              onClick={() => setShowHint((visible) => !visible)}
-              aria-expanded={showHint}
-              aria-controls="question-hint"
-            >
-              {showHint ? 'Hide hint' : 'Need a hint?'}
-            </button>
+            {hintsEnabled && (
+              <button
+                className="btn-hint"
+                onClick={() => setShowHint((visible) => !visible)}
+                aria-expanded={showHint}
+                aria-controls="question-hint"
+              >
+                {showHint ? 'Hide hint' : 'Need a hint?'}
+              </button>
+            )}
             <button className="btn-primary" onClick={handleSubmit} disabled={!selected}>
               Submit Answer
             </button>
@@ -201,7 +223,7 @@ export default function Quiz({ questions, title }) {
           </button>
         )}
       </div>
-      {!submitted && showHint && (
+      {!submitted && hintsEnabled && showHint && (
         <div className="question-hint" id="question-hint">
           <span>gentle hint</span>
           <p>{getQuizTeaching(q).hint}</p>
@@ -212,6 +234,7 @@ export default function Quiz({ questions, title }) {
 }
 
 function WrongAnswerLesson({ question, selectedLetter }) {
+  const [openStep, setOpenStep] = useState(null);
   const teaching = getQuizTeaching(question);
   const selectedOption = question.options.find(
     (option) => getOptionLetter(option) === selectedLetter,
@@ -259,7 +282,21 @@ function WrongAnswerLesson({ question, selectedLetter }) {
           {teaching.steps.map((step, index) => (
             <li key={step}>
               <span>{index + 1}</span>
-              <p>{step}</p>
+              <div>
+                <p>{step}</p>
+                <button
+                  className="step-help-toggle"
+                  onClick={() => setOpenStep(openStep === index ? null : index)}
+                  aria-expanded={openStep === index}
+                >
+                  {openStep === index ? 'Hide smaller explanation' : 'I don’t understand this step'}
+                </button>
+                {openStep === index && (
+                  <div className="step-help-detail">
+                    {explainOneStep(step).map((line) => <p key={line}>{line}</p>)}
+                  </div>
+                )}
+              </div>
             </li>
           ))}
         </ol>
@@ -272,3 +309,32 @@ function WrongAnswerLesson({ question, selectedLetter }) {
     </section>
   );
 }
+
+function ConfidenceCheck({ value, onChange }) {
+  return (
+    <section className="confidence-check">
+      <div>
+        <span>one honest check</span>
+        <h4>How did that answer feel?</h4>
+        <p>A lucky guess still needs review. This helps the coach choose what comes back later.</p>
+      </div>
+      <div>
+        {[
+          ['guessed', 'I guessed'],
+          ['unsure', 'I was unsure'],
+          ['confident', 'I feel confident'],
+        ].map(([level, label]) => (
+          <button
+            key={level}
+            className={value === level ? 'active' : ''}
+            onClick={() => onChange(level)}
+            aria-pressed={value === level}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+

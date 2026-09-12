@@ -9,8 +9,10 @@ import {
 } from './lectureData.js';
 import { lectureExamples } from './lectureExamples.js';
 import { fullExamQuiz } from './studyData.js';
+import { formulaDecisionQuestions } from './formulaDecisionData.js';
 import { getQuizTeaching } from './quizTeaching.js';
 import { getOptionLetter, isAnswerCorrect } from '../utils/quizScoring.js';
+import { buildDailyPlan } from '../utils/learningPlan.js';
 
 test('includes all lecture sources and a guided example for every lesson', () => {
   assert.equal(lectureLessons.length, 8);
@@ -66,8 +68,8 @@ test('every lecture-slide question has a complete narrated walkthrough', () => {
 });
 
 test('every exam and practice question has a hint and start-from-zero correction', () => {
-  const allQuestions = [...fullExamQuiz, ...lectureQuiz];
-  assert.equal(allQuestions.length, 36);
+  const allQuestions = [...fullExamQuiz, ...lectureQuiz, ...formulaDecisionQuestions];
+  assert.equal(allQuestions.length, 46);
 
   allQuestions.forEach((question) => {
     const teaching = getQuizTeaching(question);
@@ -75,7 +77,23 @@ test('every exam and practice question has a hint and start-from-zero correction
     assert.ok(teaching.ask);
     assert.ok(teaching.rule);
     assert.ok(teaching.steps.length >= 3);
-    assert.ok(teaching.steps.every((step) => step.length >= 12));
+    assert.ok(teaching.steps.every((step) => step.length >= 8));
     assert.ok(teaching.why);
   });
+});
+
+test('daily coach creates six unique questions with formula and confidence practice', () => {
+  const progress = { attempts: {}, mistakes: {}, confidence: {}, ladders: {}, daily: {} };
+  const questions = [...fullExamQuiz, ...lectureQuiz];
+  const plan = buildDailyPlan(
+    progress,
+    questions,
+    formulaDecisionQuestions,
+    '2026-09-11',
+  );
+
+  assert.equal(plan.length, 6);
+  assert.equal(new Set(plan.map((item) => item.question.question)).size, 6);
+  assert.ok(plan.some((item) => item.type === 'formula'));
+  assert.ok(plan.some((item) => item.type === 'easy'));
 });

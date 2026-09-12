@@ -4,6 +4,8 @@ import FlashcardDeck from './components/FlashcardDeck';
 import Quiz from './components/Quiz';
 import MatchingGame from './components/MatchingGame';
 import LectureLearning from './components/LectureLearning';
+import LearningCoach from './components/LearningCoach';
+import { LearningProgressProvider } from './context/LearningProgressContext';
 import './App.css';
 
 const SECTIONS = ['notes', 'flashcards', 'quiz', 'matching'];
@@ -22,7 +24,8 @@ export default function App() {
   }, [boringMode]);
 
   return (
-    <div className={`app ${boringMode ? 'boring-mode' : ''}`}>
+    <LearningProgressProvider>
+      <div className={`app ${boringMode ? 'boring-mode' : ''}`}>
       <header className="app-header">
         <div className="header-inner">
           <button className="logo-btn" onClick={() => setView('home')}>
@@ -62,6 +65,12 @@ export default function App() {
             >
               Lecture Learning
             </button>
+            <button
+              className={`nav-pill coach ${view === 'learning-coach' ? 'active' : ''}`}
+              onClick={() => setView('learning-coach')}
+            >
+              My Learning Coach
+            </button>
           </nav>
         </div>
       </header>
@@ -79,12 +88,14 @@ export default function App() {
           <CombinedView section={section} setSection={setSection} />
         )}
         {view === 'lecture-learning' && <LectureLearning />}
+        {view === 'learning-coach' && <LearningCoach />}
       </main>
 
       <footer className="app-footer">
         <p>made for chaya with way too much love + a little physics ♡</p>
       </footer>
-    </div>
+      </div>
+    </LearningProgressProvider>
   );
 }
 
@@ -151,6 +162,27 @@ function HomeView({ setView, setSection }) {
           <div className="topic-card-actions">
             <button className="card-btn flash" onClick={() => { setView('combined'); setSection('flashcards'); }}>Flashcards</button>
             <button className="card-btn quiz" onClick={() => { setView('combined'); setSection('quiz'); }}>Start Exam</button>
+          </div>
+        </div>
+
+        <div className="topic-card coach-card">
+          <div className="topic-card-header">
+            <span className="topic-icon">🧠</span>
+            <h2 className="topic-title">My Learning Coach</h2>
+          </div>
+          <p className="topic-summary-preview">
+            A remembered daily plan with adaptive review, confidence tracking,
+            mistake recovery, and formula-choice practice.
+          </p>
+          <div className="topic-card-meta">
+            <span>10-minute sessions</span>
+            <span>Saved mistakes</span>
+            <span>Adaptive review</span>
+          </div>
+          <div className="topic-card-actions">
+            <button className="card-btn quiz" onClick={() => setView('learning-coach')}>
+              Open My Coach
+            </button>
           </div>
         </div>
       </div>
